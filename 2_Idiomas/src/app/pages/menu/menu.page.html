@@ -1,0 +1,49 @@
+<ion-content class="ion-padding">
+
+
+  <ion-grid fixed class="centrado">
+    <ion-row class="ion-margin-top">
+      <ion-col size="12" size-md="6" size-sm="4" size-lg="12" *ngFor="let slide of slides">
+
+        <div class="ion-activatable">
+          <img [src]="slide.img" class="slide-image" [routerLink]="slide.route">
+  
+          <ion-ripple-effect type="bounded"></ion-ripple-effect>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-slides pager="true" class="slide-full" >
+    <ion-slide *ngFor="let slide of slides" class="ion-padding-horizontal">
+
+      <div class="ion-activatable">
+        <img [src]="slide.img" class="slide-image" [routerLink]="slide.route">
+
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      </div>
+
+    </ion-slide>
+
+  </ion-slides> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
+    <ion-fab-button color="danger">
+      <img [src]="opcion.img" alt="opcion.idioma">
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let bandera of banderas" (click)="seleccionar(bandera)">
+        <img [src]="bandera.img" alt="bandera.idioma">
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+    <ion-fab-button [routerLink]="['/inicio']" color="success">
+      <ion-icon name="play-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

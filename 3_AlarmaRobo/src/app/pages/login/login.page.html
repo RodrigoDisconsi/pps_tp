@@ -1,0 +1,29 @@
+<app-header titulo="Iniciar sesión"></app-header>
+
+<ion-content class="fondo ">
+  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()" >
+
+    <ion-list  inset="false" >
+
+      <ion-item class="contenido" color="dark">
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input type="email" placeholder="Ingrese su correo electrónico" name="email" [(ngModel)]="usuario.email"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="contenido" color="dark">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" placeholder="Ingrese su contraseña" name="password" [(ngModel)]="usuario.pass" required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button fill="solid" expand="full" type="submit" [disabled]="formulario.invalid">
+      Entrar
+    </ion-button>
+
+
+  </form>
+</ion-content>

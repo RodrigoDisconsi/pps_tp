@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border fondo" translucent mode="ios" >
+
+  <ion-toolbar color="dark">
+    <ion-title class="text-big" text-capitalize>Inicio</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="fondo">
+
+  <ion-card class="contenido">
+
+    <ion-card-header translucent>
+      <ion-card-title class="ion-text-center">Relevamiento visual</ion-card-title>
+      <ion-card-subtitle  class="icon">
+        <ion-icon name="people-circle-outline"></ion-icon>
+
+      </ion-card-subtitle>
+  
+    </ion-card-header>
+
+    <ion-card-content mode="ios" class="home">
+
+      <ion-button class="ion-activatable ripple-parent text-big" 
+                  expand="block" size="large" 
+                  (click)="presentAlertPrompt()">
+        <ion-icon slot="start" name="person"></ion-icon>
+        Iniciar sesión
+      </ion-button>
+
+      <ion-button color="light" slot="end" class="text-small" routerLink="/registro" 
+      size="large"  shape="round" expand="block">
+        Registrarse
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-segment (ionChange)="iniciarSesion($event)" mode="ios" color="dark" class="accesos">
+      <ion-segment-button value="Admin">
+        <ion-label>Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Tester">
+        <ion-label>Tester</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Usuario">
+        <ion-label>Usuario</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  
+  </ion-toolbar>
+</ion-footer>

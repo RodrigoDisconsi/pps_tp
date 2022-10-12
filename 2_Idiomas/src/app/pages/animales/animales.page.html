@@ -1,0 +1,71 @@
+
+<ion-content class="ion-align-items-center">
+
+
+  <ion-grid fixed class="centrado">
+    <ion-row>
+      <ion-col size="12" size-md="6" size-sm="4" size-lg="12" 
+            *ngFor="let animal of animales; let i=index ">
+
+        <img *ngIf="opcion.idioma == 'es'" [src]="animal.img" class="slide-image"
+        (click)="play(animal.nombre + '-es')" alt="animal.nombre">
+
+        <img *ngIf="opcion.idioma == 'en'" [src]="animal.img" class="slide-image"
+          (click)="play(animal.nombre + '-en')" alt="animal.nombre">
+
+        <img *ngIf="opcion.idioma == 'pt'" [src]="animal.img" class="slide-image"
+          (click)="play(animal.nombre + '-pt')" alt="animal.nombre">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-slides pager="true" class="slide-full" >
+
+    <ion-slide *ngFor="let animal of animales; let i=index " class="ion-padding-top">
+
+      <div class="ion-activatable">
+        <ion-card color="warning">
+
+          <ion-card-content translucent *ngIf="opcion">
+
+            <img *ngIf="opcion.idioma == 'es'" [src]="animal.img" class="slide-image"
+              (click)="play(animal.nombre + '-es')" alt="animal.nombre">
+
+            <img *ngIf="opcion.idioma == 'en'" [src]="animal.img" class="slide-image"
+              (click)="play(animal.nombre + '-en')" alt="animal.nombre">
+
+            <img *ngIf="opcion.idioma == 'pt'" [src]="animal.img" class="slide-image"
+              (click)="play(animal.nombre + '-pt')" alt="animal.nombre">
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-ripple-effect type="bounded"></ion-ripple-effect>
+      </div>
+
+    </ion-slide>
+
+  </ion-slides> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
+    <ion-fab-button color="danger">
+      <img [src]="opcion.img" alt="opcion.idioma">
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let bandera of banderas" (click)="seleccionar(bandera)">
+        <img [src]="bandera.img" alt="bandera.idioma">
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button [routerLink]="['/menu']" color="success">
+      <ion-icon name="play-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+
+</ion-content>

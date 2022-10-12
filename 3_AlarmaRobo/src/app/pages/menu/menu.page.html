@@ -1,0 +1,42 @@
+<app-header titulo="Menú principal"></app-header>
+
+<ion-content class="fondo" color="dark">
+
+    <ion-chip color="light" mode="ios" outline="true">
+        <ion-label>X : {{ejeX}}</ion-label>
+    </ion-chip>
+
+    <ion-list lines="none"  color="dark" >
+
+        <ion-item color="dark" >
+            <ion-label mode="ios"  class="ion-text-center" >
+                <h1><b>Presione la alarma</b></h1>
+            </ion-label>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-button (click)="activarAlarma()" strong="true" class="center-content boton-grande" color="danger"
+                expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
+        <ion-icon class="icon" name="warning-outline"></ion-icon>
+    </ion-button>
+
+    <ion-list lines="none"  color="dark">
+
+        <ion-item color="warning" class="ion-justify-content-center"  strong="true">
+            <ion-label *ngIf="estado == 1" class="ion-text-center"><h3>Alarma activada</h3></ion-label>
+            <ion-label *ngIf="estado == 0" class="ion-text-center"><h3>Alarma desactivada</h3></ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="estado == 1" color="dark" >
+            <ion-label position="stacked" color="dark">Ingrese su contraseña para desactivar</ion-label>
+            <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+        <ion-button *ngIf="estado == 1" size="large" (click)="desactivarAlarma()" 
+                    expand="block" fill="solid" shape="round">
+            DESACTIVAR
+        </ion-button>
+
+    </ion-list>
+
+</ion-content>

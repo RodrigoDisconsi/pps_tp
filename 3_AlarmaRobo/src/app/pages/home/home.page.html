@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title mode="ios">
+      <h2><b>Alarmator</b></h2>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="fondo" >
+
+  
+
+  <ion-list class="contenido" color="dark" inset="false">
+  
+    <ion-item-divider color="dark">
+    </ion-item-divider>
+  
+    <ion-item class="contenido" color="dark">
+      <ion-label><b>Moderna aplicación de <br> alarma antirobo<br> 
+                accionada por movimiento del <br> dispositivo<br></b>
+                </ion-label>
+      
+    </ion-item>
+
+    <ion-item class="contenido" color="dark">
+      <ion-label><b>Si Usted está registrado <br> inicie sesión <br>
+        Si Usted es nuevo debe crear <br> un nuevo usuario.</b></ion-label>
+    </ion-item>
+
+    <ion-item-divider color="dark">
+    </ion-item-divider>
+
+    <ion-item color="dark">
+      <ion-button class="center-content" size="large" routerLink="/login" 
+                  routerLinkActive="router-link-active" expand="full" fill="clear">
+                  Iniciar sesión
+      </ion-button>
+      
+    </ion-item>
+
+    <ion-item-divider color="dark">
+    </ion-item-divider>
+
+    <ion-item color="dark">
+      <ion-button size="large" routerLink="/registro" class="center-content"
+                  expand="full" fill="clear" routerLinkActive="router-link-active">
+                  Nuevo usuario
+      </ion-button>
+    </ion-item>
+
+  </ion-list>
+  
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="dark">
+    
+    <ion-segment (ionChange)="iniciarSesion($event)" >
+      <ion-segment-button value="Admin">
+        <ion-label>Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Tester">
+        <ion-label>Tester</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Usuario">
+        <ion-label>Usuario</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+</ion-footer>
