@@ -13,8 +13,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-  login = "../assets/img/login.svg";
-  registro = "../assets/img/register.svg";
+  login = "../assets/img/login.png";
+  registro = "../assets/img/register.png";
   mensaje: string;
   usuario: Usuario = new Usuario();
 

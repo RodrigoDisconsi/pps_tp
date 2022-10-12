@@ -1,39 +1,10 @@
 .splash{
-
-    
-
-    #logo {
-
-        min-width: fit-content !important;
-        min-height: fit-content !important;
-        
-
-        .cls-1 {
-            opacity: 0;
-            transform: rotate3d(1, 1, 0, 50deg);
-            animation: 1s 0.2s ease fadeInAndSpin;
-            animation-fill-mode: forwards;
+        .tracking-in-expand {
+            animation: tracking-in-expand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         }
 
-        .cls-2 {
-            opacity: 0;
-            transform: rotate3d(1, 1, 0, 60deg);
-            animation: 1s 0.4s ease fadeInAndSpin;
-            animation-fill-mode: forwards;
-        }
-
-        .cls-3 {
-            opacity: 0;
-            transform: rotate3d(1, 1, 0, 50deg);
-            animation: 1s 0.6s ease fadeInAndSpin;
-            animation-fill-mode: forwards;
-        }
-
-        .cls-4 {
-            opacity: 0;
-            transform: rotate3d(1, 1, 0, 60deg);
-            animation: 1s 0.8s ease fadeInAndSpin;
-            animation-fill-mode: forwards;
+        .tracking-in-contract-bck {
+            animation: tracking-in-contract-bck 2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
         }
 
         .cls-5, .cls-6 {
@@ -41,8 +12,6 @@
             animation: 2s 1.5s linear fadeIn;
             animation-fill-mode: forwards;
         }
-
-    }
 }
 
 @keyframes fadeInAndSpin {
@@ -62,10 +31,43 @@
 
 }
 
-.modal-wrapper {
-    display: flex!important;
-    justify-content: center !important;
-    align-content: center!important;
-    height: 100% !important;
-    width: 100% !important;
+@keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 1em;
+      transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+
+@keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+ion-content{
+    --background:rgb(166, 202, 149);
+    top: 30%;
+    position: absolute;
+}
+
+img{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 200px;
+    height: 200px;
 }
