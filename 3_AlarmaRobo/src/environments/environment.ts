@@ -4,29 +4,29 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyAFi4P8vxtKg_LKeR3fjzFgwdPihHfe15g",
-    authDomain: "web-apps---practica.firebaseapp.com",
-    databaseURL: "https://web-apps---practica.firebaseio.com",
-    projectId: "web-apps---practica",
-    storageBucket: "web-apps---practica.appspot.com",
-    messagingSenderId: "1035173945210",
-    appId: "1:1035173945210:web:8a7d55a54e5d5a66ff80c3"
+  firebaseConfig: {
+    apiKey: "AIzaSyBlpa_KNpCM2gW3x7CU92prqCm1P6UeTcc",
+    authDomain: "tps-pps.firebaseapp.com",
+    databaseURL: "https://tps-pps-default-rtdb.firebaseio.com",
+    projectId: "tps-pps",
+    storageBucket: "tps-pps.appspot.com",
+    messagingSenderId: "370063651241",
+    appId: "1:370063651241:web:648d9dd8a8f0d6a71ad4b8"
   },
   perfiles: {
     admin: {
       email: "admin@mail.com",
-      pass: "sarasa",
+      pass: "123456",
       rol : "Administrador"
     },
     tester: {
       email: "tester@mail.com",
-      pass: "sarasa",
+      pass: "123456",
       rol : "Tester"
     },
     usuario: {
       email: "usuario@mail.com",
-      pass : "sarasa",
+      pass : "123456",
       rol : "Usuario"
     }
   }

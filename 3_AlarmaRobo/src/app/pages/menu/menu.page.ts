@@ -41,8 +41,8 @@ export class MenuPage implements OnInit {
     this.platform.ready().then(() => {
       this.audioService.preload('derecha','assets/audio/derecha.mp3');
       this.audioService.preload('izquierda','assets/audio/izquierda.mp3');
-      this.audioService.preload('vertical','assets/audio/vertical.mp3');
-      this.audioService.preload('horizontal','assets/audio/horizontal.mp3');
+      this.audioService.preload('vertical','assets/audio/heylisten.mp3');
+      this.audioService.preload('horizontal','assets/audio/heylisten.mp3');
      
     });
   }
@@ -74,6 +74,8 @@ export class MenuPage implements OnInit {
                 this.deshabilitarBoton = false;
                 this.stop();
                 this.presentAlert("Alarma desactivada");
+              }).catch(e => {
+                this.presentAlert("Error al corroborar contraseña");
               })
         });
   }
@@ -89,35 +91,31 @@ export class MenuPage implements OnInit {
 
       this.deviceRef = this.deviceMotion.watchAcceleration(option)
       .subscribe((acc: DeviceMotionAccelerationData) => {
-        this.ejeX = "" + acc.x;
-        this.ejeY = "" + acc.y;
-        this.ejeZ = "" + acc.z;
+        this.ejeX = "" + parseInt(acc.x.toString()).toFixed(2).toString();
+        this.ejeY = "" + parseInt(acc.y.toString()).toFixed(2).toString();
+        this.ejeZ = "" + parseInt(acc.z.toString()).toFixed(2).toString();
         this.timeStamp = "" + acc.timestamp;
 
-
-        if(this.ejeX > 1 && this.ejeX <= 9)
-        {
-          console.log("IZQUIERDA");
-          this.posicion = "izquierda";
-        }
-
-        if(this.ejeX < -1 && this.ejeX >= -9 )
-        {
-          console.log("DERECHA");
-          this.posicion = "derecha";
-        }
-
-        if(this.ejeX > 8 && this.ejeX <= 11 || this.ejeX < -8 && this.ejeX >= -11)
+        if(this.ejeZ <= 10 && this.ejeZ >= 8 && this.ejeY >= -2 && this.ejeY <= 2)
         {   
-          console.log("HORIZONTAL");
           this.posicion = "horizontal";
         }
 
-        if(this.ejeX <= 2 && this.ejeX >= -2 || this.ejeX == 0 || this.ejeX == -0)
+        if((this.ejeZ <= 4 && this.ejeZ >= -2 && this.ejeY <= 9 && this.ejeY >= 7))
         {
           console.log("VERTICAL");
           this.posicion = "vertical";  
         } 
+
+        if(this.ejeX > 6 && this.ejeX <= 10)
+        {
+          this.posicion = "izquierda";
+        }
+
+        if(this.ejeX < -6 && this.ejeX >= -10 )
+        {
+          this.posicion = "derecha";
+        }
 
         if(this.posicion != this.posicionAnterior)
         {
@@ -126,11 +124,10 @@ export class MenuPage implements OnInit {
             case "vertical" :
 
               this.audioService.play('vertical');
-              this.flashlight.switchOff();
+              this.flashlight.switchOn();
               setTimeout(() => {
-                this.flashlight.switchOn();
+                this.flashlight.switchOff();
               }, 5000);
-              this.flashlight.switchOff();
               this.posicionAnterior = this.posicion;
 
               break;
