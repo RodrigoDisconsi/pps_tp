@@ -1,0 +1,36 @@
+<app-header titulo="Iniciar sesión"></app-header>
+
+<ion-content color="dark">
+
+  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()"  >
+
+    <ion-list color="dark">
+
+      <ion-list-header color="dark">
+        <ion-label>Validación de datos: Es válido {{ formulario.valid }}</ion-label>
+      </ion-list-header>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input type="email"  name="email" [(ngModel)]="usuario.email"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" name="pass" [(ngModel)]="usuario.pass"
+          required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button color="tertiary" fill="outline" expand="full" 
+                type="submit" [disabled]="formulario.invalid">
+      Enviar
+    </ion-button>
+
+  </form>
+
+</ion-content>

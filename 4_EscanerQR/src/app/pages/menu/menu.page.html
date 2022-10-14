@@ -1,0 +1,70 @@
+<app-header titulo="Menú principal" class="ion-no-margin"></app-header>
+
+<ion-content [fullscreen]="true" color="dark" class="fondo-transparente">
+
+
+  <ion-list color="dark" lines="none" class="ion-no-margin ion-no-padding">
+    <ion-list-header color="dark">
+
+      <ion-text color="primary">
+        <h1> Billetera electrónica</h1>
+      </ion-text> 
+
+    </ion-list-header>
+
+    <div class="ion-activatable" color="dark">
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+
+
+      <ion-item (click)="presentActionSheet()" color="dark">
+        <ion-icon size="large" slot="end" name="qr-code-sharp"></ion-icon>
+        <ion-label>Cargar con código QR</ion-label>
+      </ion-item>
+
+
+    </div>
+  </ion-list>
+
+  <ion-list color="dark" lines="none" class="ion-no-margin ion-no-padding">
+
+    <ion-list-header color="dark">
+
+      <ion-text color="primary">
+        <h2> Su crédito disponible es</h2>
+      </ion-text>
+    </ion-list-header>
+    
+
+    <ion-item class="giant" color="dark" *ngIf="usuario">
+      <ion-label>$ {{ usuario.credito }}</ion-label>
+    </ion-item>
+
+
+    <ion-item color="dark">
+      <ion-label class="datos"> <h1>Datos personales</h1></ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label class="datos">Nombre: {{ usuario.nombre  }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label class="datos">D.N.I.: {{ usuario.dni  }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label class="datos">Teléfono: {{ usuario.telefono  }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label class="datos">Domicilio: {{ usuario.domicilio  }}</ion-label>
+    </ion-item>
+    
+
+  </ion-list>
+
+</ion-content>
+<ion-footer color="dark">
+  <ion-toolbar >
+    <ion-button (click)="borrarCreditos()" size="large" expand="full" fill="solid"
+    color="medium">
+    Limpiar créditos
+  </ion-button>
+  </ion-toolbar>
+</ion-footer>

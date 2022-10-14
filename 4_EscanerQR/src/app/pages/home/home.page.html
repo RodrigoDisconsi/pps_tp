@@ -1,0 +1,28 @@
+<app-header titulo="Inicio"></app-header>
+
+<ion-content [fullscreen]="true" color="dark" >
+
+  <div id="container">
+    <strong>Canutix</strong>
+    <p>Tu billetera más segura</p>
+
+
+    <ion-button color="tertiary" strong="true" size="medium"
+                [routerLink]="['/login']" >
+                Iniciar sesión
+    </ion-button>
+    <ion-button color="tertiary" strong="true" size="medium"
+                [routerLink]="['/registro']">
+                Registrarse
+    </ion-button>
+
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-button size="large" (click)="presentActionSheet()" expand="block" fill="solid" color="tertiary">
+      Elegir perfil
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

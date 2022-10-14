@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.escanerqr",
+  "appName": "Canutix",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
