@@ -1,0 +1,68 @@
+<app-header titulo="Registro"></app-header>
+
+
+<ion-content color="dark">
+
+  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()" color="dark">
+
+    <ion-list mode="ios" lines="none">
+
+      <ion-list-header color="dark">
+        <ion-label>Alta de usuario</ion-label>
+      </ion-list-header>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Alias</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="usuario.alias">
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="usuario.email" [pattern]="emailPattern" required>
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list color="dark" lines="none" mode="ios">
+      <ion-radio-group value="4A" [(ngModel)]="usuario.division" name="division">
+        <ion-list-header color="dark">
+          <ion-label mode="ios">División</ion-label>
+        </ion-list-header>
+
+        <ion-item color="dark">
+          <ion-label mode="ios">4A</ion-label>
+          <ion-radio slot="end" value="4A"></ion-radio>
+        </ion-item>
+
+        <ion-item color="dark">
+          <ion-label mode="ios">4B</ion-label>
+          <ion-radio slot="end" value="4B"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list color="dark" mode="ios">
+      <ion-item color="dark">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password"  minlength="6" name="password" [(ngModel)]="usuario.pass" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark" class="contenido">
+        <ion-label position="floating">Confirme su contraseña</ion-label>
+        <ion-input type="password" minlength="6" name="confirmacion" [(ngModel)]="confirmacionPass" required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button size="large" color="tertiary" fill="solid" expand="full" type="submit" 
+              [disabled]="formulario.invalid">
+      Crear usuario
+    </ion-button>
+
+  </form>
+
+
+</ion-content>

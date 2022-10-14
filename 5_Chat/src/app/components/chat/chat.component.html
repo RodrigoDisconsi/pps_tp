@@ -1,0 +1,49 @@
+<ion-content  class="ion-padding contenido" *ngIf="mensajes" #content 
+[ngStyle]="cambiarColor()">
+
+      <ion-grid fixed *ngFor="let mensaje of mensajes; let i = index" color="primary">
+        
+        <ion-row *ngIf="idUsuario != mensaje.usuario">
+
+          <ion-col size="12">
+
+            <div class="ion-text-start mensaje-ajeno" >
+
+              <ion-chip color="dark" mode="ios" >
+                <ion-label style="color: white;">{{mensaje.nombreUsuario}} - {{mensaje.fecha | fecha}}</ion-label>
+              </ion-chip>
+              
+              <ion-textarea [value]="mensaje.texto" rows="1"
+                             autoGrow="true" color="dark" mode="ios"  readonly="true">
+                
+              </ion-textarea>
+
+            </div>
+
+          </ion-col>
+
+        </ion-row>
+        
+        <ion-row *ngIf="idUsuario == mensaje.usuario">
+         
+          <ion-col size="12" >
+
+            <div class="ion-text-end mensaje-propio" >
+              
+              <ion-chip color="dark" mode="ios" >
+                <ion-label style="color: white;">{{mensaje.fecha | fecha}}</ion-label>
+              </ion-chip>
+              <ion-textarea  [value]="mensaje.texto" rows="1"
+                             autoGrow="true" color="dark" mode="ios" readonly="true">
+                
+              </ion-textarea>
+
+            </div>
+
+          </ion-col>
+          
+        </ion-row>
+
+      </ion-grid>
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border" translucent >
+  <ion-toolbar color="danger" >
+
+    <ion-title color="light" text-capitalize>Inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content color="dark" class="ion-no-padding">
+  
+  <ion-fab vertical="top" horizontal="end" slot="fixed" >
+    <ion-fab-button color="light">
+      <ion-icon name="log-in-sharp"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="iniciarSesion('Admin')" color="success">
+        <ion-icon name="construct-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="iniciarSesion('Tester')" color="medium">
+        <ion-icon name="bug-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="iniciarSesion('Usuario')" color="primary">
+        <ion-icon name="body-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+
+  </ion-fab>
+
+    <ion-toolbar color="dark">
+      <h1>
+        <ion-title translucent ><strong>Simple Chat App</strong> <br>
+          <ion-icon color="dark" slot="end" name="chatbox-ellipses-outline"></ion-icon>
+        </ion-title>
+      </h1>
+      
+    </ion-toolbar>
+
+    <ion-img class="img" [src]="imgSrc"></ion-img>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar color="dark" class="ion-padding-bottom">
+    <ion-button color="danger" size="large" [routerLink]="['/login']" expand="block">
+      <ion-icon slot="icon-only" name="log-in-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button color="danger" size="large" [routerLink]="['/registro']" expand="block">
+      <ion-icon slot="icon-only" name="person-add-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

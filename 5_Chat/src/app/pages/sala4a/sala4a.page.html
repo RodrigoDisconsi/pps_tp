@@ -1,0 +1,30 @@
+<ion-header  >
+  <ion-toolbar color="secondary" >
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu"></ion-back-button>
+    </ion-buttons>
+
+
+    <ion-title color="dark" text-capitalize>Sala 4A</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+
+  <app-chat [color]="color" [mensajes]="mensajes" [mensaje]="mensaje" 
+            [idUsuario]="usuario.id"></app-chat>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar color="dark">
+    <ion-item color="dark">
+      <ion-input name="mensaje" [(ngModel)]="textoAuxiliar" clearInput="true" clearOnEdit="true"></ion-input>
+      <ion-button slot="end" (click)="enviar()" fill="clear" shape="round">
+        <ion-icon color="secondary" name="send"></ion-icon>
+      </ion-button>
+  
+    </ion-item>
+  </ion-toolbar>
+ 
+</ion-footer>

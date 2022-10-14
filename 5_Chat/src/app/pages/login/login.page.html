@@ -1,0 +1,38 @@
+<app-header titulo="Login"></app-header>
+
+
+<ion-content color="dark">
+
+
+  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()"  >
+
+    <ion-list mode="ios" lines="none">
+
+      <ion-list-header color="dark">
+        <ion-label>Inicio de sesión</ion-label>
+      </ion-list-header>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" placeholder="Ingrese email" name="email" [(ngModel)]="usuario.email"
+          pattern="pattern" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" placeholder="Ingrese password" name="pass" [(ngModel)]="usuario.pass"
+          required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button color="tertiary" fill="solid" expand="full" 
+                type="submit" [disabled]="formulario.invalid">
+      Enviar
+    </ion-button>
+
+  </form>
+
+</ion-content>
