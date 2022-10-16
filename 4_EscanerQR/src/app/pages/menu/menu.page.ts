@@ -34,7 +34,6 @@ export class MenuPage implements OnDestroy, OnInit {
     console.log("Constructor");
 
     this.platform.backButton.subscribeWithPriority(0, () => {
-      document.getElementsByTagName("body")[0].style.opacity = "1";
       this.qrScan.unsubscribe();
     });
 
@@ -81,13 +80,6 @@ export class MenuPage implements OnDestroy, OnInit {
           }
         },
         {
-          text: 'Configurar',
-          icon: 'construct-outline',
-          handler: () => {
-            // this.configurar();
-          }
-        },
-        {
           text: 'Cancelar',
           icon: 'close-outline',
           role: 'cancel',
@@ -104,14 +96,12 @@ export class MenuPage implements OnDestroy, OnInit {
   leerQR() {
 
     this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
 
       this.scaneado = barcodeData.text;
 
       if (this.validarCodigo(this.usuario, barcodeData.text)) {
         this.dataService.fetchQR(barcodeData.text)
           .then(snapshot => {
-            if (this.validarCodigo(this.usuario, barcodeData.text)) {
               this.dataQR = snapshot.val();
               this.usuario.credito += this.dataQR;
               this.usuario.codigos.push(barcodeData.text);
@@ -119,14 +109,13 @@ export class MenuPage implements OnDestroy, OnInit {
               this.dataService.actualizar(this.usuario)
                 .then(() => this.presentLoading("Actualizando..."))
                 .finally(() => this.presentToast(`CARGA REALIZADA DE ${this.dataQR}`));
-            }
-            else {
-              this.presentAlert("CÓDIGO YA UTILIZADO");
-            }
           }
           ).catch(error => { console.log(error) });
-      }
-
+        }
+        else {
+          this.presentAlert("CÓDIGO YA UTILIZADO");
+        }
+        
     },
       (error) => console.log(error));
     this.codigos = this.usuario.codigos;

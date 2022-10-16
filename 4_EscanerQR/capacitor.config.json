@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.escanerqr",
-  "appName": "Canutix",
+  "appName": "ScanQr",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

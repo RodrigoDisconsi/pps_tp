@@ -1,0 +1,8 @@
+{
+  "name": "edificio",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
