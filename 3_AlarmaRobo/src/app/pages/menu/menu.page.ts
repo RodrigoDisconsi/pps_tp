@@ -12,6 +12,7 @@ import { AlertController, Platform } from '@ionic/angular';
 
 import { DataService } from 'src/app/services/data.service';
 import { AudioService } from 'src/app/services/audio.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +20,6 @@ import { AudioService } from 'src/app/services/audio.service';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-  password: string;
   deshabilitarBoton: boolean = false;
   estado: Estado = Estado.DESACTIVADA;
   ejeX;
@@ -32,11 +32,13 @@ export class MenuPage implements OnInit {
   deviceRef;
   posicion;
   posicionAnterior = "";
+  passwordForm: FormGroup;
+  isSubmitted:boolean = false;
   
   constructor(private platform: Platform, private deviceMotion: DeviceMotion, 
               private flashlight: Flashlight, private vibration: Vibration,   
               private dataService: DataService, private audioService: AudioService,
-              private alertController: AlertController) 
+              private alertController: AlertController, public formBuilder:FormBuilder) 
   {   
     this.platform.ready().then(() => {
       this.audioService.preload('derecha','assets/audio/derecha.mp3');
@@ -47,7 +49,14 @@ export class MenuPage implements OnInit {
     });
   }
 
+  get errorControl() {
+    return this.passwordForm.controls;
+  }
+
   ngOnInit() {
+    this.passwordForm = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   activarAlarma()
@@ -63,10 +72,12 @@ export class MenuPage implements OnInit {
 
   desactivarAlarma()
   {
+    console.log(this.passwordForm.get('password').value);
+    this.isSubmitted = true;
     this.dataService.obtenerLocal()
         .then(usuario => {
 
-          usuario.pass = this.password;
+          usuario.pass = this.passwordForm.get('password').value;
           this.dataService.login(usuario)
               .then( res => {
                 console.log(res);

@@ -1,0 +1,25 @@
+<app-header titulo="Feas"></app-header>
+
+<ion-content >
+
+  <ion-grid fixed >
+
+    <ion-row > 
+      
+      <app-tarjetas [imagenes]="imagenes"></app-tarjetas>
+
+    </ion-row>
+   
+  
+  </ion-grid>
+
+</ion-content>
+<ion-footer >
+  <ion-toolbar class="contenido">
+        <ion-tab-button  class="contenido" (click)="subirFoto()" fill="clear" color="primary" expand="full">
+          <ion-icon name="camera-sharp"></ion-icon>
+          <ion-label>Sacar foto</ion-label>
+        </ion-tab-button>
+
+  </ion-toolbar>
+</ion-footer>

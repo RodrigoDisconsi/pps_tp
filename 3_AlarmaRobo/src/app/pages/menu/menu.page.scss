@@ -10,3 +10,23 @@
 .boton-grande{
     height: 200px !important;
 }
+
+
+.center-content{
+    position: absolute;
+    top: 30%;
+}
+
+ion-item{
+    margin-top: 1rem;
+}
+
+h1{
+    font-weight: 900;
+}
+
+.error-msg{
+    align-self: flex-start;
+    align-content: flex-start;
+    color: red;
+}

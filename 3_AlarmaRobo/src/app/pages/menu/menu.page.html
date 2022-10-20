@@ -1,50 +1,37 @@
 <app-header titulo="Menú principal"></app-header>
+<ion-content [fullscreen]="true" class="fondo">
 
-<ion-content class="fondo" color="dark">
+    <div class="center-content">
+            <ion-button (click)="activarAlarma()" strong="true" class="boton-grande" color="danger"
+                        expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
+                <!-- <ion-icon class="icon" name="warning-outline"></ion-icon> -->
+                <ion-img src="../../../assets/img/buttom-alarm.webp"></ion-img>
+            </ion-button>
 
-    <ion-chip color="light" mode="ios" outline="true">
-        <ion-label>X : {{ejeX}}</ion-label>
-    </ion-chip>
-
-    <ion-chip color="light" mode="ios" outline="true">
-        <ion-label>Z : {{ejeZ}}</ion-label>
-    </ion-chip>
-
-    <ion-chip color="light" mode="ios" outline="true">
-        <ion-label>Y : {{ejeY}}</ion-label>
-    </ion-chip>
-
-    <ion-list lines="none"  color="dark" >
-
-        <ion-item color="dark" >
-            <ion-label mode="ios"  class="ion-text-center" >
-                <h1><b>Presione la alarma</b></h1>
-            </ion-label>
+        <ion-item class="fondo" style="margin-top: 2rem;">
+            <ion-label *ngIf="estado == 1" class="ion-text-center" color="danger"><h1>Alarma activada</h1></ion-label>
+            <ion-label *ngIf="estado == 0" class="ion-text-center" color="dark"><h1>Alarma desactivada</h1></ion-label>
         </ion-item>
-
-    </ion-list>
-
-    <ion-button (click)="activarAlarma()" strong="true" class="center-content boton-grande" color="danger"
-                expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
-        <ion-icon class="icon" name="warning-outline"></ion-icon>
-    </ion-button>
-
-    <ion-list lines="none"  color="dark">
-
-        <ion-item color="warning" class="ion-justify-content-center"  strong="true">
-            <ion-label *ngIf="estado == 1" class="ion-text-center"><h3>Alarma activada</h3></ion-label>
-            <ion-label *ngIf="estado == 0" class="ion-text-center"><h3>Alarma desactivada</h3></ion-label>
-        </ion-item>
-
-        <ion-item *ngIf="estado == 1" color="dark" >
-            <ion-label position="stacked" color="dark">Ingrese su contraseña para desactivar</ion-label>
-            <ion-input [(ngModel)]="password" type="password"></ion-input>
-        </ion-item>
-        <ion-button *ngIf="estado == 1" size="large" (click)="desactivarAlarma()" 
-                    expand="block" fill="solid" shape="round">
+        <form [formGroup]="passwordForm" (ngSubmit)="desactivarAlarma()" novalidate>
+            <ion-item *ngIf="estado == 1" class="fondo">
+                <ion-label position="floating" color="dark">Ingrese su contraseña para desactivar</ion-label>
+                <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <ion-note *ngIf="isSubmitted && errorControl.password.errors?.required" class="error-msg">
+                La contraseña es requerida.
+            </ion-note>
+            <ion-note *ngIf="isSubmitted && errorControl.password.errors?.minlength" class="error-msg">
+                Al menos 6 caracteres
+            </ion-note>
+            <ion-button *ngIf="estado == 1" size="large"
+            expand="block" fill="solid" shape="round" type="submit" style="margin-top: 3rem;">
             DESACTIVAR
-        </ion-button>
+            </ion-button>
+        </form>
 
-    </ion-list>
+    
+    </div>
+
+
 
 </ion-content>

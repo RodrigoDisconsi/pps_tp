@@ -1,0 +1,50 @@
+<app-header titulo="Registro"></app-header>
+
+<ion-content class="fondo" mode="ios">
+
+  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()" >
+
+    <ion-list lines="full" class="ion-no-margin"  class="contenido">
+
+      <ion-list-header lines="full" mode="ios" >
+        <ion-label color="dark" translucent >Nuevo usuario
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item color="dark" class="contenido">
+        <ion-label  position="floating">Ingrese su nombre de usuario</ion-label>
+        <ion-input type="text"  name="nombre" [(ngModel)]="usuario.nombre" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark" class="contenido">
+        <ion-label  position="floating">Ingrese su correo electrónico</ion-label>
+        <ion-input type="email"  name="email" [(ngModel)]="usuario.email"
+          [pattern]="patron"  required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark" class="contenido"> 
+        <ion-label position="floating">Ingrese su contraseña</ion-label>
+        <ion-input type="password" minlength="6"  name="password" [(ngModel)]="usuario.pass"
+          required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item color="dark" class="contenido">
+        <ion-label position="floating">Confirme su contraseña</ion-label>
+        <ion-input type="password" minlength="6"  name="password" [(ngModel)]="confirmacionPass"
+          required>
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-button fill="solid" size="large" expand="block" color="tertiary"
+                 strong="true" type="submit" [disabled]="formulario.invalid">
+      Alta
+    </ion-button>
+
+  </form>
+
+</ion-content>
