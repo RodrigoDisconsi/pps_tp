@@ -28,13 +28,6 @@ export class AppComponent {
     });
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
-
   async presentModal() {
     this.statusBar.styleDefault();
 

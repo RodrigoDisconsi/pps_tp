@@ -7,6 +7,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 import { Observable, interval } from 'rxjs';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-menu',
@@ -39,8 +40,8 @@ export class MenuPage implements OnDestroy, OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.cargarDatos();
+  async ngOnInit(): Promise<void> {
+    await this.cargarDatos();
     this.presentLoading("Cargando datos...");
 
   }
@@ -121,12 +122,18 @@ export class MenuPage implements OnDestroy, OnInit {
     this.codigos = this.usuario.codigos;
   }
 
-  cargarDatos(): void {
-    this.dataService.obtenerLocal()
+  cargarDatos(): Promise<void> {
+    return new Promise<void>((resolve,reject) => {
+      this.dataService.obtenerLocal()
       .then(data => {
-        console.log(data);
         this.usuario = Object.assign(new Usuario, data);
+        resolve();
+      })
+      .catch(err =>{
+        reject(err);
       });
+    })
+    
   }
 
 

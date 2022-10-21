@@ -20,12 +20,10 @@ export class DataService {
     // return this.test(usuario);
     return new Promise<any>((resolve, reject) => {
       this.firebaseAuth.signInWithEmailAndPassword(usuario.email, usuario.pass)
-        .then(response => {
+        .then(async (response) => {
           console.log("Login");
-          this.guardarLocal(response.user.uid).then((res) => {
-            console.log(res);
-            resolve(response);
-          });
+          const resp = await this.guardarLocal(response.user.uid);
+          resolve(resp);
         }, error => reject(error));
     });
   }
@@ -60,20 +58,17 @@ export class DataService {
   public guardarLocal(id: string) {
     console.log(id);
 
-    const promesa = new Promise<any>(resolve => {
-      database().ref('usuarios/' + id).on('value', (snapshot) => {
+    return new Promise<any>(resolve => {
+      database().ref('usuarios/' + id).on('value', async (snapshot) => {
         console.log("Guardar Local Storage");
         DataService.usuarioActual = snapshot.val();
-        this.storage.set('usuario', snapshot.val());
+        await this.storage.set('usuario', snapshot.val());
         resolve(DataService.usuarioActual);
       });
     })
-
-    return promesa;
   }
 
   public obtenerLocal(): Promise<void | Usuario> {
-    console.log("Obtener Local Storage");
     return this.storage.get('usuario');
   }
 

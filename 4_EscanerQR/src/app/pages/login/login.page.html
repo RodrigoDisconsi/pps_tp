@@ -1,36 +1,29 @@
 <app-header titulo="Iniciar sesión"></app-header>
 
-<ion-content color="dark">
-
-  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()"  >
-
-    <ion-list color="dark">
-
-      <ion-list-header color="dark">
-        <ion-label>Validación de datos: Es válido {{ formulario.valid }}</ion-label>
-      </ion-list-header>
-
+<ion-content [fullscreen]="true" color="dark">
+  <div class="center-content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitTemplate()">
       <ion-item color="dark">
-        <ion-label position="floating">Correo electrónico</ion-label>
-        <ion-input type="email"  name="email" [(ngModel)]="usuario.email"
-          required>
-        </ion-input>
+        <ion-label position="floating" color="light"><strong>Ingrese email</strong></ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
-
+      <ion-note *ngIf="isNotValidField('email')" class="error-msg">
+        {{getErrorMessage('email')}}
+      </ion-note>
+  
       <ion-item color="dark">
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" name="pass" [(ngModel)]="usuario.pass"
-          required>
-        </ion-input>
+        <ion-label position="floating" color="light"><strong>Password</strong></ion-label>
+        <ion-input formControlName="pass" type="password"></ion-input>
       </ion-item>
-
-    </ion-list>
-
-    <ion-button color="tertiary" fill="outline" expand="full" 
-                type="submit" [disabled]="formulario.invalid">
-      Enviar
-    </ion-button>
-
+      <ion-note *ngIf="isNotValidField('pass')" class="error-msg">
+        {{getErrorMessage('pass')}}
+      </ion-note>
+      
+      <ion-button color="tertiary" fill="solid" expand="block" type="submit" [disabled]="this.loginForm.invalid">
+        Enviar
+      </ion-button>
   </form>
+  </div>
+
 
 </ion-content>

@@ -29,19 +29,19 @@ export class HomePage {
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Perfiles de usuario',
+      header: 'Perfiles',
       translucent: true,
       buttons: [{
         text: 'Admin',
         role: 'close',
-        icon: 'star',
+        icon: 'person-add-outline',
         handler: () => {
           this.iniciarSesion('Admin');
         }
       }, {
         text: 'Tester',
         role: 'close',
-        icon: 'share',
+        icon: 'construct-outline',
         handler: () => {
           this.iniciarSesion('Tester');
         }
@@ -81,8 +81,8 @@ export class HomePage {
           break;
       }
       console.log(this.usuario);
-      this.dataService.login(this.usuario).then(()=>{
-        this.presentToast(`Perfil : ${this.usuario.rol}`);
+      this.dataService.login(this.usuario).then(async ()=>{
+        await this.presentToast(`Perfil : ${this.usuario.rol}`);
         this.router.navigate(['/menu']);
       }).
       catch( err => this.presentToast(err));
@@ -94,6 +94,6 @@ export class HomePage {
       message,
       duration: 2000
     });
-    toast.present();
+    return toast.present();
   }
 }
