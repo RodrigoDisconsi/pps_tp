@@ -2,15 +2,17 @@
 
 
 <ion-content color="dark">
-    <ion-title class="ion-padding" strong="true">Elegí el curso para charlar</ion-title>
+    <ion-title class="ion-padding ion-text-center" strong="true">Eliga un curso</ion-title>
     
-    <ion-button class="boton-grande" [routerLink]="['/sala4a']" color="secondary"
-                 expand="block" fill="solid" shape="round">
-        <h1><b><ion-label strong="true">PPS-4A</ion-label> </b></h1>
-    </ion-button>
-    <ion-button class="boton-grande" [routerLink]="['/sala4b']" color="primary"
-                expand="block" fill="solid" shape="round">
-        <h1><b><ion-label strong="true">PPS-4B</ion-label> </b></h1>
-    </ion-button>
+    <div class="container">
+        <ion-button class="boton-grande" [routerLink]="['/sala4a']" color="secondary"
+                     expand="block" fill="solid" shape="round" style="margin-bottom: 3rem;">
+            <h1><b><ion-label strong="true">PPS-4A</ion-label> </b></h1>
+        </ion-button>
+        <ion-button class="boton-grande" [routerLink]="['/sala4b']" color="primary"
+                    expand="block" fill="solid" shape="round">
+            <h1><b><ion-label strong="true">PPS-4B</ion-label> </b></h1>
+        </ion-button>
+    </div>
 
 </ion-content>

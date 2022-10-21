@@ -18,13 +18,14 @@
 </ion-content>
 <ion-footer >
   <ion-toolbar color="dark">
-    <ion-item color="dark">
-      <ion-input name="mensaje" [(ngModel)]="textoAuxiliar" clearInput="true" clearOnEdit="true"></ion-input>
-      <ion-button slot="end" (click)="enviar()" fill="clear" shape="round">
-        <ion-icon color="secondary" name="send"></ion-icon>
-      </ion-button>
-  
-    </ion-item>
+    <form [formGroup]="chatForm" (ngSubmit)="enviar()">
+      <ion-item color="dark">
+        <ion-input name="mensaje" formControlName="mensaje" clearInput="true" clearOnEdit="true"></ion-input>
+        <ion-button slot="end" [disabled]="this.chatForm.invalid" fill="clear" shape="round">
+          <ion-icon color="secondary" name="send"></ion-icon>
+        </ion-button>
+    
+      </ion-item>
+    </form>    
   </ion-toolbar>
- 
 </ion-footer>
