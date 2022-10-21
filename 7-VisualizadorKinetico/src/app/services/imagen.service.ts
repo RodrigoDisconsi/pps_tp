@@ -6,6 +6,8 @@ import { Usuario } from '../clases/usuario';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { UploadMetadata } from '@angular/fire/compat/storage/interfaces';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +22,59 @@ export class ImagenService {
   constructor(private storage: AngularFireStorage, private toastController: ToastController, private db: AngularFireDatabase) {
   }
 
+  async subirVariasFotos(usuario:Usuario, tipo: TipoImagen): Promise<Imagen[]> {
+    let carpeta; 
+    let imagenes: Imagen[] = [];
+    await Camera.pickImages({
+      quality: 90,
+      limit: 2,
+    }).then((resp) => {
+      const photos = resp.photos;
+      photos.forEach(async (photo) => {
+        let imagen = new Imagen();
+        const file = await Filesystem.readFile({
+            path: photo.path
+        });
+        imagen.base64 = file.data;
+        imagen.fecha = new Date().toUTCString();
+        imagen.usuario = usuario.id;
+        imagen.nombreUsuario = usuario.nombre;
+        imagen.tipo = tipo;
+        imagen.votos = [];
+
+        if (tipo == TipoImagen.POSITIVA) {
+          ImagenService.fotosBonitas.push(imagen);
+          carpeta = "bonitas";
+        }
+        else if (tipo == TipoImagen.NEGATIVA) {
+          ImagenService.fotosFeas.push(imagen);
+          carpeta = "feas";
+        }
+
+        // Se sube imagen a Base de Datos
+        const imagenRef= await this.crear(imagen);
+        imagen.id = imagenRef.key;
+        const snapshot = await this.guardarImagen(imagen, carpeta);
+        imagen.url = await snapshot.ref.getDownloadURL();
+        await this.actualizar(imagen);
+        imagenes.push(imagen);
+      });
+
+    });
+    return imagenes;
+  }
+
   async sacarFoto(usuario: Usuario, tipo: TipoImagen): Promise<Imagen> {
     let imagen: Imagen = new Imagen();
     let carpeta;
 
     await Camera.getPhoto({
       quality: 90,
-      resultType: CameraResultType.Base64,
-      correctOrientation: true,
-      source: CameraSource.Prompt,
-      promptLabelHeader: 'Subir foto',
-      promptLabelCancel: 'Cancelar',
-      promptLabelPhoto: 'Subir desde galería',
-      promptLabelPicture: 'Nueva foto',
-
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      promptLabelHeader: 'Seleccione una opción',
+      promptLabelPhoto: 'Galeria',
+      promptLabelPicture: 'Camara'
     })
       .then(imageData => {
         console.log(imageData);
@@ -45,25 +86,24 @@ export class ImagenService {
         imagen.votos = [];
 
         if (tipo == TipoImagen.POSITIVA) {
-          ImagenService.fotosBonitas.push(imagen);
-          //ImagenService.fotosBonitas.sort((a,b) => this.comparadorFechas(a.fecha,b.fecha));
+          // ImagenService.fotosBonitas.push(imagen);
           carpeta = "bonitas";
         }
         else if (tipo == TipoImagen.NEGATIVA) {
-          ImagenService.fotosFeas.push(imagen);
+          // ImagenService.fotosFeas.push(imagen);
           carpeta = "feas";
         }
 
         // Se sube imagen a Base de Datos
-        // this.crear(imagen).then( img => {
-        //   imagen = img;
-        //   // Se guarda imagen en el Storage
-        //   this.guardarImagen(imagen, carpeta)
-        //       .then(snapshot => snapshot.ref.getDownloadURL()
-        //                                 .then(res => imagen.url = res))
-        //       .finally(() => this.actualizar(imagen));
-        // })
-        // .catch(console.error);
+        this.crear(imagen).then( img => {
+          imagen = imagen;
+          // Se guarda imagen en el Storage
+          this.guardarImagen(imagen, carpeta)
+              .then(snapshot => snapshot.ref.getDownloadURL()
+                                        .then(res => imagen.url = res))
+              .finally(() => this.actualizar(imagen));
+        })
+        .catch(console.error);
       })
       .catch(error => {
         this.presentToast(error);
@@ -96,6 +136,7 @@ export class ImagenService {
   private async crear(imagen: Imagen) {
     return this.db.list('/imagenes')
       .push(imagen);
+      // .then( snapshot => imagen.id = snapshot.key);
   }
 
   public actualizar(imagen: Imagen): Promise<any> {
@@ -111,7 +152,7 @@ export class ImagenService {
   public async fetchAll() {
     return new Promise<any>((resolve, reject) => {
       this.db.list('/imagenes/').valueChanges().subscribe((resp) => {
-        console.log(resp);
+        ImagenService.imagenes = [];
         resp.forEach((data: any) => {
           let aux = Imagen.CrearImagen(data.id, data.base64, data.url, data.usuario, data.nombreUsuario,
             data.fecha, data.tipo, data.votos);

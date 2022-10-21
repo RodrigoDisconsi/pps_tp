@@ -82,23 +82,9 @@ export class TarjetasComponent implements OnInit, OnDestroy {
         {
           switch(this.posicion)
           {
-            // case "vertical" :
-
-            //   this.audioService.play('vertical');
-            //   this.flashlight.switchOn();
-            //   setTimeout(() => {
-            //     this.flashlight.switchOff();
-            //   }, 5000);
-            //   this.posicionAnterior = this.posicion;
-
-            //   break;
-            // case "horizontal" :
-
-            //   this.vibration.vibrate(5000);
-            //   this.audioService.play('horizontal');
-            //   this.posicionAnterior = this.posicion;
-
-            //   break;
+            case "vertical" :
+              this.slideFirst();
+              break;
             case "derecha" :
               this.slideNext();
 

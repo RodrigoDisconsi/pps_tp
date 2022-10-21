@@ -12,13 +12,15 @@
 
 </ion-header>
 
-<ion-content class="fondo">
+<ion-content>
 
-  <ion-grid fixed >
-    <ion-row class="contenido">
-      <ion-col size="6"  *ngFor="let ruta of rutas" >
-        <h2><ion-label strong="true" style="color: white;"> {{ruta.nombre}}</ion-label></h2>
-        <ion-img id="img-boton" [src]="ruta.src" (click)="navegar(ruta.ruta)"></ion-img>
+  <ion-grid fixed class="centrado">
+    <ion-row>
+      <ion-col size="12" size-md="6" size-sm="4" size-lg="12" *ngFor="let ruta of rutas" >
+        <div>
+          <h2 class="bottom-left"><ion-label color="dark"> <strong> {{ruta.nombre}}</strong> </ion-label></h2>
+          <ion-img class="image" [src]="ruta.src" (click)="navegar(ruta.ruta)"></ion-img>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

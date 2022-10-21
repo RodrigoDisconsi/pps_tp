@@ -53,6 +53,18 @@ export class FeasPage implements OnInit, DoCheck {
                       .finally(() => this.dataService.actualizar(this.usuario));
   }
 
+  async subirVarias() 
+  {
+    this.imagenService.subirVariasFotos(this.usuario, TipoImagen.NEGATIVA)
+                      .then(imagenes => {
+                        imagenes.forEach((imagen) => {
+                          this.usuario.imagenes.push(imagen.id);
+                        });
+                      })
+                      .catch(console.error)
+                      .finally(() => this.dataService.actualizar(this.usuario));
+  }
+
   async presentLoading(message) {
     const loading = await this.loadingController.create({
       message,

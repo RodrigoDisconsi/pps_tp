@@ -16,10 +16,14 @@
 </ion-content>
 <ion-footer >
   <ion-toolbar class="contenido">
-        <ion-tab-button  class="contenido" (click)="subirFoto()" fill="clear" color="primary" expand="full">
+        <ion-button (click)="subirFoto()" color="primary">
           <ion-icon name="camera-sharp"></ion-icon>
           <ion-label>Sacar foto</ion-label>
-        </ion-tab-button>
+        </ion-button>
+        <ion-button (click)="subirVarias()" color="medium" slot="primary">
+          <ion-icon name="camera-sharp"></ion-icon>
+          <ion-label>Subir varias</ion-label>
+        </ion-button>
 
   </ion-toolbar>
 </ion-footer>

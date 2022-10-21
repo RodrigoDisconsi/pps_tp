@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { TarjetaComponent } from './tarjeta/tarjeta.component';
 import { IonicModule } from '@ionic/angular';
-import { SplashComponent } from './splash/splash.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { ChartModule } from 'angular-highcharts';
 
@@ -18,7 +17,6 @@ import { DeviceMotion } from '@awesome-cordova-plugins/device-motion/ngx';
     HeaderComponent, 
     TarjetaComponent,
     TarjetasComponent,
-    SplashComponent,
     GraficoBarrasComponent,
     GraficoTortaComponent
   ],
@@ -32,7 +30,6 @@ import { DeviceMotion } from '@awesome-cordova-plugins/device-motion/ngx';
     HeaderComponent,
     TarjetaComponent,
     TarjetasComponent,
-    SplashComponent,
     GraficoBarrasComponent,
     GraficoTortaComponent
   ],

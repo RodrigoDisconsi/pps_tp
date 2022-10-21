@@ -6,14 +6,14 @@
 
 </ion-header>
 
-<ion-content class="fondo">
+<ion-content class="fondo" style="top: 15%;">
 
   <ion-card class="contenido">
 
     <ion-card-header translucent>
-      <ion-card-title class="ion-text-center">Relevamiento visual</ion-card-title>
-      <ion-card-subtitle  class="icon">
-        <ion-icon name="people-circle-outline"></ion-icon>
+      <ion-card-title class="ion-text-center"><strong>¡Bienvenido!</strong></ion-card-title>
+      <ion-card-subtitle  class="ion-text-center">
+        <ion-icon class="icon" name="person-circle-sharp"></ion-icon>
 
       </ion-card-subtitle>
   
@@ -40,7 +40,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="dark">
+  <ion-toolbar color="primary">
     <ion-segment (ionChange)="iniciarSesion($event)" mode="ios" color="dark" class="accesos">
       <ion-segment-button value="Admin">
         <ion-label>Admin</ion-label>

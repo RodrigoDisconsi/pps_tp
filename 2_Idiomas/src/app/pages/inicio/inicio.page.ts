@@ -33,7 +33,7 @@ export class InicioPage implements OnInit {
   async promptSignIn() {
     const alert = await this.alertCtrl.create({
       translucent: true,
-      mode: "ios",
+      mode: "md",
       inputs: [
         {
           name: 'email',
@@ -92,7 +92,7 @@ export class InicioPage implements OnInit {
   async promptSignUp() {
     const alert = await this.alertCtrl.create({
       translucent: true,
-      mode: "ios",
+      mode: "md",
       inputs: [
         {
           name: 'email',
@@ -196,7 +196,5 @@ export class InicioPage implements OnInit {
     });
 
     await popover.present();
-
-    // const { data } = await popover.onDidDismiss();
   }
 }
