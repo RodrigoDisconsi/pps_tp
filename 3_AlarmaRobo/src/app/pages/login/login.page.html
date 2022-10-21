@@ -1,29 +1,32 @@
 <app-header titulo="Iniciar sesión"></app-header>
 
-<ion-content class="fondo ">
-  <form #formulario="ngForm" (ngSubmit)="onSubmitTemplate()" >
-
-    <ion-list  inset="false" >
-
-      <ion-item class="contenido" color="dark">
-        <ion-label position="stacked">Correo electrónico</ion-label>
-        <ion-input type="email" placeholder="Ingrese su correo electrónico" name="email" [(ngModel)]="usuario.email"
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
-        </ion-input>
+<ion-content [fullscreen]="true" class="fondo">
+  <div class="center-content">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitTemplate()">
+      
+      <ion-item class="fondo">
+        <ion-label position="floating" color="dark"><strong>Email</strong></ion-label>
+        <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
+      <ion-note *ngIf="isNotValidField('email')" class="error-msg">
+        {{getErrorMessage('email')}}
+      </ion-note>
 
-      <ion-item class="contenido" color="dark">
-        <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input type="password" placeholder="Ingrese su contraseña" name="password" [(ngModel)]="usuario.pass" required>
-        </ion-input>
+      <ion-item class="fondo">
+        <ion-label position="floating" color="dark"><strong>Password</strong></ion-label>
+        <ion-input formControlName="pass" type="password"></ion-input>
       </ion-item>
-
-    </ion-list>
-
-    <ion-button fill="solid" expand="full" type="submit" [disabled]="formulario.invalid">
-      Entrar
-    </ion-button>
-
-
+  
+      <ion-note *ngIf="isNotValidField('pass')" class="error-msg">
+        {{getErrorMessage('pass')}}
+      </ion-note>
+  
+      <div class="fondo">
+        <ion-button expand="full" type="submit" [disabled]="loginForm.invalid">
+          Entrar
+        </ion-button>
+      </div>
   </form>
+  </div>
+  
 </ion-content>

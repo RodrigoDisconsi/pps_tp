@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/clases/usuario';
 import { DataService } from 'src/app/services/data.service';
@@ -13,14 +14,24 @@ export class LoginPage implements OnInit {
   usuario: Usuario = new Usuario();
   pattern = "^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$";
   mensaje: string;
+  loginForm: FormGroup;
 
-  constructor(public toastController: ToastController, private dataService: DataService) { }
+  constructor(public toastController: ToastController, private dataService: DataService, private form:FormBuilder) { }
 
   ngOnInit() {
+    this.loginForm = this.form.group({
+      email: ['', [Validators.required, Validators.email]],
+      pass: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  get loginControls() {
+    return this.loginForm.controls;
   }
 
   onSubmitTemplate() {
     console.log('Form submit');
+    this.usuario = this.loginForm.value as Usuario;
 
     this.dataService.login(this.usuario)
                     .then(res => {
@@ -43,5 +54,23 @@ export class LoginPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  getErrorMessage(field: string): string {
+    let retorno = "";
+    if(this.loginControls[field].hasError("required")) {
+      retorno = "El campo es requerido.";
+    }
+    else if(this.loginControls[field].hasError('email')){
+      retorno = "Formato de mail inválido";
+    }
+    else if(this.loginControls[field].hasError('minlength')){
+      retorno = "La contraseña debe contener 6 caracteres mínimo";
+    }
+    return retorno;
+  }
+
+  isNotValidField(field: string): boolean {
+    return (this.loginControls[field].touched && this.loginControls[field].dirty == true);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/clases/usuario';
@@ -15,22 +16,39 @@ export class RegistroPage implements OnInit {
   emailPattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;  
   lettersPattern = /^[a-zA-Z]+$/;
   dniPattern = /^[0-9]{7,8}$/;
-  alphaPattern = /^[a-zA-Z0-9 ]+$/;
   phonePattern = /^[0-9]{10}$/;
   confirmacionPass: string;
   mensaje: string;
+  registerForm: FormGroup;
+  isSubmitted:boolean = false;
 
   constructor(public toastController: ToastController, 
               private dataService: DataService,
-              private router: Router) { }
+              private router: Router,public formBuilder:FormBuilder) { }
+
+  get registerControls() {
+    return this.registerForm.controls;
+  }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.pattern(this.lettersPattern)]],
+      apellido: ['', [Validators.required, Validators.pattern(this.lettersPattern)]],
+      email: ['', [Validators.required, Validators.email]],
+      dni: ['', [Validators.required, Validators.pattern(this.dniPattern)]],
+      domicilio: ['', [Validators.required]],
+      telefono: ['', [Validators.required, Validators.pattern(this.phonePattern)]],
+      pass: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassowrd: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   onSubmitTemplate()
   {
     console.log('Form submit');
     console.log(this.usuario);
+    this.usuario = this.registerForm.value as Usuario;
+    this.confirmacionPass = this.registerForm.value.confirmPassowrd;
 
     if(this.usuario.pass != this.confirmacionPass)
     {
@@ -43,7 +61,7 @@ export class RegistroPage implements OnInit {
         console.log("Usuario registrado");
         this.mensaje = "Se ha registrado exitosamente";
         this.router.navigate(['/home']);
-        
+         
       }, error => {
         console.error(error);
         this.mensaje = error.message;
@@ -59,5 +77,31 @@ export class RegistroPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  getErrorMessage(field: string): string {
+    let retorno = "";
+    if(this.registerControls[field].hasError("required")) {
+      retorno = "El campo es requerido.";
+    }
+    else if(this.registerControls[field].hasError('email')){
+      retorno = "Formato de mail inválido";
+    }
+    else if(this.registerControls[field].hasError('pattern')){
+      if((field == 'nombre' || field == 'apellido')){
+        retorno = "El campo debe contener solo letras!";
+      }
+      else{
+        retorno = 'Debe contener solo números';
+      }
+    }
+    else if(this.registerControls[field].hasError('minlength')){
+      retorno = "La contraseña debe contener 6 caracteres mínimo";
+    }
+    return retorno;
+  }
+
+  isNotValidField(field: string): boolean {
+    return (this.registerControls[field].touched && this.registerControls[field].dirty == true);
   }
 }

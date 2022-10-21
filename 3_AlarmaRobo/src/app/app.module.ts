@@ -38,7 +38,7 @@ import { Flashlight } from '@ionic-native/flashlight/ngx';
     ComponentsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   providers: [
     StatusBar,

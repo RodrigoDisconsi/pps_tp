@@ -72,7 +72,6 @@ export class MenuPage implements OnInit {
 
   desactivarAlarma()
   {
-    console.log(this.passwordForm.get('password').value);
     this.isSubmitted = true;
     this.dataService.obtenerLocal()
         .then(usuario => {
