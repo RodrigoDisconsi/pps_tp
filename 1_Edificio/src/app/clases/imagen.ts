@@ -7,7 +7,7 @@ export class Imagen
     nombreUsuario: string;
     fecha: string;
     tipo: TipoImagen;
-    votos: string[];
+    votos: any[];
 
     public Imagen()
     {
@@ -15,7 +15,7 @@ export class Imagen
     }
 
     public static CrearImagen(id: string, base64: string, url: string, usuario: string, 
-                            nombreUsuario: string,fecha: string, tipo: TipoImagen, votos: string[])
+                            nombreUsuario: string,fecha: string, tipo: TipoImagen, votos: any[])
     {
         let imagen = new Imagen();
 

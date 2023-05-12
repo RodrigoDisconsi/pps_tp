@@ -17,7 +17,7 @@ export class TarjetaComponent implements OnInit {
   {
     this.dataService.obtenerLocal()
         .then( data => {
-          this.usuario = Object.assign(new Usuario, data);
+          this.usuario = data;
         });
   }
 
@@ -25,9 +25,13 @@ export class TarjetaComponent implements OnInit {
 
   votar()
   {
-    if(!this.imagen.votos.includes(this.usuario.id))
+    if(!this.imagen.votos || !(this.imagen.votos && this.imagen.votos.find((voto) => voto.userId == this.usuario.id)))
     {
-      this.imagen.votos.push(this.usuario.id);
+      const voto = {
+        userId: this.usuario.id,
+        fecha: new Date().toUTCString(),
+      }
+      this.imagen.votos.push(voto);
       this.imagenService.actualizar(this.imagen);
 
     }

@@ -14,7 +14,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class InicioPage implements OnInit {
   login = "../assets/img/login.png";
-  registro = "../assets/img/register.png";
+  registro = "../assets/img/register.webp";
   mensaje: string;
   usuario: Usuario = new Usuario();
 

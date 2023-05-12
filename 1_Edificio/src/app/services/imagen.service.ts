@@ -4,6 +4,7 @@ import { Imagen, TipoImagen } from '../clases/imagen';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { database } from 'firebase';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from '../clases/usuario';
@@ -20,7 +21,7 @@ export class ImagenService {
   public static fotosUsuario: Imagen[] = [];
   public static imagenes = [];
 
-  constructor(private storage : AngularFireStorage, private toastController: ToastController) 
+  constructor(private storage : AngularFireStorage, private toastController: ToastController, private db: AngularFireDatabase) 
   {
   }
 
@@ -63,7 +64,7 @@ export class ImagenService {
 
       // Se sube imagen a Base de Datos
       this.crear(imagen).then( img => {
-        imagen = img;
+        imagen = imagen;
         // Se guarda imagen en el Storage
         this.guardarImagen(imagen, carpeta)
             .then(snapshot => snapshot.ref.getDownloadURL()
@@ -104,50 +105,70 @@ export class ImagenService {
 
   private async crear(imagen: Imagen)
   {
-    console.log(imagen);
-    database().ref('imagenes')
-                    .push()
-                    .then( snapshot => imagen.id = snapshot.key)
-                    .catch(() => console.info("No se pudo realizar alta"));
-    return imagen;
+    // console.log(imagen);
+    // database().ref('imagenes')
+    //                 .push()
+    //                 .then( snapshot => imagen.id = snapshot.key)
+    //                 .catch(() => console.info("No se pudo realizar alta"));
+    // return imagen;
+    return this.db.list('/imagenes')
+    .push(imagen);
   }
 
   public actualizar(imagen: Imagen): Promise<any>
   {
-    return database().ref('imagenes/' + imagen.id)
-                    .update(imagen)
-                    .then(() => console.info("Actualizacion exitosa"))
-                    .catch(() => console.info("No se pudo actualizar"));
+    // return database().ref('imagenes/' + imagen.id)
+    //                 .update(imagen)
+    //                 .then(() => console.info("Actualizacion exitosa"))
+    //                 .catch(() => console.info("No se pudo actualizar"));
+    return this.db.object('/imagenes/' + imagen.id)
+      .update(imagen);
   }
 
   public borrar(id: number): Promise<any>
   {
-    return database().ref('imagenes/' + id)
-                    .remove()
-                    .then(() => console.info("Imagen eliminada"))
-                    .catch(() => console.info("No se pudo realizar la baja."));
+    // return database().ref('imagenes/' + id)
+    //                 .remove()
+    //                 .then(() => console.info("Imagen eliminada"))
+    //                 .catch(() => console.info("No se pudo realizar la baja."));
+    return this.db.object('/imagenes/' + id)
+      .remove();
   }
 
   public async fetchAll()
   {
-    const fetch = await database().ref('imagenes').on('value',(snapshot) => 
-    {
-      ImagenService.imagenes = [];
+    // const fetch = await database().ref('imagenes').on('value',(snapshot) => 
+    // {
+    //   ImagenService.imagenes = [];
 
-      snapshot.forEach((child) =>
-      {
-        var data = child.val();
-        let aux = Imagen.CrearImagen(data.id, data.base64, data.url, data.usuario, data.nombreUsuario,
-                                      data.fecha, data.tipo, data.votos);
-        ImagenService.imagenes.push(aux);
+    //   snapshot.forEach((child) =>
+    //   {
+    //     var data = child.val();
+    //     let aux = Imagen.CrearImagen(data.id, data.base64, data.url, data.usuario, data.nombreUsuario,
+    //                                   data.fecha, data.tipo, data.votos);
+    //     ImagenService.imagenes.push(aux);
         
+    //   });
+    //   console.info("Fetch de todas las imagenes");
+    //   console.info(ImagenService.imagenes);
+    //   this.getFeas();
+    //   this.getLindas();
+    // });
+    // return fetch;
+    return new Promise<any>((resolve, reject) => {
+      this.db.list('/imagenes/').valueChanges().subscribe((resp) => {
+        ImagenService.imagenes = [];
+        resp.forEach((data: any) => {
+          let aux = Imagen.CrearImagen(data.id, data.base64, data.url, data.usuario, data.nombreUsuario,
+            data.fecha, data.tipo, data.votos);
+          ImagenService.imagenes.push(aux);
+
+        });
+        this.getFeas();
+        this.getLindas();
+        resolve("OK");
       });
-      console.info("Fetch de todas las imagenes");
-      console.info(ImagenService.imagenes);
-      this.getFeas();
-      this.getLindas();
     });
-    return fetch;
   }
 
   public fetchUsuario(id: string)

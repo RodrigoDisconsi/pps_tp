@@ -10,7 +10,7 @@
             <div class="ion-text-start mensaje-ajeno" >
 
               <ion-chip color="dark" mode="ios" >
-                <ion-label style="color: white;">{{mensaje.nombreUsuario}} - {{mensaje.fecha | fecha}}</ion-label>
+                <ion-label style="color: rgb(147, 147, 147);">{{mensaje.nombreUsuario}} - {{mensaje.fecha | fecha}}</ion-label>
               </ion-chip>
               
               <ion-textarea [value]="mensaje.texto" rows="1"
@@ -31,7 +31,7 @@
             <div class="ion-text-end mensaje-propio" >
               
               <ion-chip color="dark" mode="ios" >
-                <ion-label style="color: white;">{{mensaje.fecha | fecha}}</ion-label>
+                <ion-label style="color: rgb(147, 147, 147);">{{mensaje.fecha | fecha}}</ion-label>
               </ion-chip>
               <ion-textarea  [value]="mensaje.texto" rows="1"
                              autoGrow="true" color="dark" mode="ios" readonly="true">

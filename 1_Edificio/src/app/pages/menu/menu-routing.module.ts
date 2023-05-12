@@ -7,22 +7,8 @@ import { MenuPage } from './menu.page';
 const routes: Routes = [
   {
     path: '',
-    component: MenuPage
-  },
-  {
-    path: '',
     component: MenuPage,
-    children : [
-      {
-        path: 'bonitas',
-        loadChildren: () => import('../bonitas/bonitas.module').then( m => m.BonitasPageModule)
-      },
-      {
-        path: 'feas',
-        loadChildren: () => import('../feas/feas.module').then( m => m.FeasPageModule)
-      },
-    ]
-  }
+  },
 ];
 
 @NgModule({

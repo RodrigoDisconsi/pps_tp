@@ -38,7 +38,6 @@ export class BonitasPage implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log("Do CHECK");
       // Cargo las imagenes guardadas
     this.imagenes = ImagenService.fotosBonitas;
     

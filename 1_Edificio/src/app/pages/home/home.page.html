@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border fondo" translucent mode="ios" >
 
   <ion-toolbar color="dark">
-    <ion-title class="text-big" text-capitalize>Inicio</ion-title>
+    <ion-title class="text-big" text-capitalize>BIENVENIDO</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -11,9 +11,11 @@
   <ion-card class="contenido">
 
     <ion-card-header translucent>
-      <ion-card-title class="ion-text-center">Relevamiento visual</ion-card-title>
+      <ion-card-title class="ion-text-center text">RELEVAMIENTO VISUAL</ion-card-title>
       <ion-card-subtitle  class="icon">
-        <ion-icon name="people-circle-outline"></ion-icon>
+        <div class="business-icon">
+          <img class="cls-5" src="../../../assets/img/icon.png">
+        </div>
 
       </ion-card-subtitle>
   
@@ -24,7 +26,6 @@
       <ion-button class="ion-activatable ripple-parent text-big" 
                   expand="block" size="large" 
                   (click)="presentAlertPrompt()">
-        <ion-icon slot="start" name="person"></ion-icon>
         Iniciar sesión
       </ion-button>
 

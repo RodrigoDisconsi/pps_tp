@@ -22,24 +22,24 @@ export class MenuPage implements OnInit {
   rutas = 
   [
     {
-      nombre: 'Feas',
+      nombre: 'FEAS',
       ruta: '/feas',
-      src: "/assets/img/feo.jpg",
+      src: "/assets/img/feo.png",
     },
     {
-      nombre: 'Bonitas',
+      nombre: 'BONITAS',
       ruta: '/bonitas',
-      src: "/assets/img/bonito.jpg",
+      src: "/assets/img/bonito.png",
     },
     {
-      nombre: 'Listado',
+      nombre: 'LISTADO',
       ruta: '/listado',
-      src: "/assets/img/photographer.png",
+      src: "/assets/img/listado.png",
     },
     {
-      nombre: 'Puntajes',
+      nombre: 'PUNTAJES',
       ruta: '/graficos',
-      src: "/assets/img/statistics.png",
+      src: "/assets/img/charts.png",
     }
   ];
   seleccionado: string = '/feas';
@@ -53,11 +53,13 @@ export class MenuPage implements OnInit {
   ngOnInit() 
   {
     this.presentLoading("Cargando fotos...");
-    this.dataService.gerUserDetail().then( data => {
-      this.imagenService.fetchUsuario(data.uid)
-    });
-    this.dataService.obtenerLocal().then((resp) =>{
-      console.log("OBTENER LOCAL - ", resp);
+    this.imagenService.fetchAll().then(() => {
+      this.dataService.gerUserDetail().then( data => {
+        this.imagenService.fetchUsuario(data.uid)
+      });
+      this.dataService.obtenerLocal().then((resp) =>{
+        console.log("OBTENER LOCAL - ", resp);
+      });
     });
   }
 
