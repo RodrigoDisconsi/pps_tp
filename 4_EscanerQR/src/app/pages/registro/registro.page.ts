@@ -14,7 +14,7 @@ export class RegistroPage implements OnInit {
   usuario: Usuario = new  Usuario();
   emailPattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;  
   lettersPattern = /^[a-zA-Z]+$/;
-  dniPattern = /^[0-9]{7,8}$/;
+  dniPattern = /^[0-9]{8}$/;
   alphaPattern = /^[a-zA-Z0-9 ]+$/;
   phonePattern = /^[0-9]{10}$/; 
   confirmacionPass: string;
@@ -92,6 +92,12 @@ export class RegistroPage implements OnInit {
       }
       else{
         retorno = 'Debe contener solo números';
+        if(field == 'dni'){
+          retorno = retorno + " y 8 caracteres.";
+        }
+        else{
+          retorno = retorno + " y 10 caracteres.";
+        }
       }
     }
     else if(this.registerControls[field].hasError('minlength')){

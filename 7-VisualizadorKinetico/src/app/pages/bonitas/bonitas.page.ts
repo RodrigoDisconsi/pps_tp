@@ -21,11 +21,12 @@ export class BonitasPage implements OnInit, DoCheck {
               private toastController: ToastController) 
   {
     this.usuario = new Usuario();
-    // Cargo el usuario logueado
     this.dataService.obtenerLocal()
         .then( data => {
-          this.usuario = Object.assign(new Usuario, data);
+          this.usuario = JSON.parse(data.value) as Usuario;
+          console.info(this.usuario);
         });
+
   }
 
   ngOnInit() 
@@ -47,7 +48,19 @@ export class BonitasPage implements OnInit, DoCheck {
     this.imagenService.sacarFoto(this.usuario, TipoImagen.POSITIVA)
                       .then(imagen => this.usuario.imagenes.push(imagen.id))
                       .catch(console.error)
-                      .finally(() => this.dataService.actualizar(this.usuario));  
+                      .finally(() => this.dataService.actualizar(this.usuario));
+  }
+
+  async subirVarias() 
+  {
+    this.imagenService.subirVariasFotos(this.usuario, TipoImagen.POSITIVA)
+                      .then(imagenes => {
+                        imagenes.forEach((imagen) => {
+                          this.usuario.imagenes.push(imagen.id);
+                        });
+                      })
+                      .catch(console.error)
+                      .finally(() => this.dataService.actualizar(this.usuario));
   }
 
   async presentLoading(message) {

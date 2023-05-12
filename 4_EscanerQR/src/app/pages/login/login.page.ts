@@ -26,13 +26,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get loginControls() {
-    return this.loginForm.controls;
-  }
-  
-
   onSubmitTemplate()
   {
+    this.usuario = this.loginForm.value as Usuario;
     if(this.usuario)
     {
       this.dataService.login(this.usuario).then(res => {
@@ -68,6 +64,10 @@ export class LoginPage implements OnInit {
     console.log('Loading dismissed!');
   }
 
+  get loginControls() {
+    return this.loginForm.controls;
+  }
+  
   getErrorMessage(field: string): string {
     let retorno = "";
     if(this.loginControls[field].hasError("required")) {

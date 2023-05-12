@@ -45,12 +45,14 @@ export class Sala4aPage implements OnInit, DoCheck {
   enviar()
   {
     this.mensaje = new Mensaje();
+    this.textoAuxiliar = this.chatForm.value.mensaje;
     console.log(this.textoAuxiliar);
     if(this.textoAuxiliar)
     {
       this.mensaje = Mensaje.CrearMensaje('0',this.textoAuxiliar, this.usuario.id, this.usuario.alias,
                                           new Date().toUTCString(), Salas._4A);
       this.textoAuxiliar = null;
+      this.chatForm.reset();
     }
   }
 

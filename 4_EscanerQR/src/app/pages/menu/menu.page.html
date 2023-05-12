@@ -1,22 +1,18 @@
 <app-header titulo="Menú principal" class="ion-no-margin"></app-header>
 
-<ion-content [fullscreen]="true" color="dark" class="fondo" style="top:15%;">
+<ion-content [fullscreen]="true" color="dark" class="fondo" style="top:10%;">
 
-  <ion-item class="fondo ion-text-center" color="dark" lines="none">
+  <ion-item class="fondo ion-text-center" color="dark" lines="none" style="margin-bottom: 2rem;">
     <ion-label color="light"><h1><strong>Billetera virtual</strong></h1></ion-label>
   </ion-item>
-  <div class="center-content">
+  <div class="center-content" class="fondo" color="dark">
     <ion-list class="fondo" color="dark" lines="none">
       <div class="ion-activatable" color="dark">
-        
-        
-        <ion-item (click)="presentActionSheet()" color="dark">
-          <ion-icon size="large" slot="end" name="qr-code-sharp"></ion-icon>
-          <ion-label>Cargar con código QR</ion-label>
+        <ion-item (click)="presentActionSheet()" color="dark ion-text-center">
+          <ion-label>
+            <ion-icon size="large"name="qr-code-sharp"></ion-icon>
+          </ion-label>
         </ion-item>
-        <ion-ripple-effect type="bounded"></ion-ripple-effect>
-  
-  
       </div>
     </ion-list>
   
@@ -49,9 +45,9 @@
 
 
 </ion-content>
-<ion-footer color="dark">
-  <ion-toolbar >
-    <ion-button (click)="borrarCreditos()" size="large" expand="full" fill="solid"
+<ion-footer class="fondo" color="dark">
+  <ion-toolbar class="fondo" color="dark">
+    <ion-button (click)="borrarCreditos()" size="large" expand="block" fill="solid"
     color="medium">
     Limpiar créditos
   </ion-button>

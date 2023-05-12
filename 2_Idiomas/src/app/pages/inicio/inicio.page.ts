@@ -71,7 +71,7 @@ export class InicioPage implements OnInit {
               this.dataService.login(this.usuario).
               then(()=>{
                 this.mensaje = "Sesión iniciada.";
-                this.router.navigate(['/inicio']);
+                this.router.navigate(['/menu']);
               }).
               catch( error => this.mensaje = error).
               finally(() => this.presentToast());
@@ -140,7 +140,7 @@ export class InicioPage implements OnInit {
               this.dataService.registrar(this.usuario).
               then(()=>{
                 this.mensaje = "Alta exitosa.";
-                this.router.navigate(['/inicio']);
+                this.router.navigate(['/menu']);
               }).
               catch( error => this.mensaje = error).
               finally(() => this.presentToast());

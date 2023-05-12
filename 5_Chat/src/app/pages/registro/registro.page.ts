@@ -21,6 +21,7 @@ export class RegistroPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.usuario.division = "4A";
   }
 
   onSubmitTemplate()

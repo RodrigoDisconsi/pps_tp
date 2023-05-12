@@ -6,7 +6,7 @@ import { AudioService, Idioma, ILenguajeSeleccionado } from 'src/app/services/au
   templateUrl: './numeros.page.html',
   styleUrls: ['./numeros.page.scss'],
 })
-export class NumerosPage implements OnInit, AfterViewInit {
+export class NumerosPage implements OnInit {
   opcion: ILenguajeSeleccionado;
 
   numeros: { nombre,img, audio_es, audio_en, audio_pt }[] = 
@@ -109,13 +109,6 @@ export class NumerosPage implements OnInit, AfterViewInit {
   {
     this.opcion = AudioService.idiomaSeleccionado; 
   }
-
-  ngAfterViewInit()
-  {
-   
-    
-  }
-
   ngOnInit() 
   {
   }
