@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/clases/usuario';
 import { DataService } from 'src/app/services/data.service';
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   mensaje: string;
   loginForm: FormGroup;
 
-  constructor(public toastController: ToastController, private dataService: DataService, private form:FormBuilder) { }
+  constructor(public toastController: ToastController, private dataService: DataService, private form:FormBuilder, private router:Router) { }
 
   ngOnInit() {
     this.loginForm = this.form.group({
@@ -37,6 +38,7 @@ export class LoginPage implements OnInit {
                     .then(res => {
                       console.log(res);
                       this.mensaje = "Login correcto";
+                      this.router.navigate(['/menu']);
                     }, 
                     error => {
                       console.error(error);

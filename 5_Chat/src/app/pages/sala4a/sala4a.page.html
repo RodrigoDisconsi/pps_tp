@@ -18,10 +18,10 @@
 </ion-content>
 <ion-footer >
   <ion-toolbar color="dark">
-    <form [formGroup]="chatForm" (ngSubmit)="enviar()">
+    <form [formGroup]="chatForm">
       <ion-item color="dark">
         <ion-input name="mensaje" formControlName="mensaje" clearInput="true" clearOnEdit="true"></ion-input>
-        <ion-button slot="end" [disabled]="this.chatForm.invalid" fill="clear" shape="round">
+        <ion-button (click)="enviar()" slot="end" [disabled]="this.chatForm.invalid" fill="clear" shape="round">
           <ion-icon color="secondary" name="send"></ion-icon>
         </ion-button>
     

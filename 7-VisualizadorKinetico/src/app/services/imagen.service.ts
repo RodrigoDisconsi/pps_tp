@@ -70,13 +70,13 @@ export class ImagenService {
 
     await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
       promptLabelHeader: 'Seleccione una opción',
       promptLabelPhoto: 'Galeria',
       promptLabelPicture: 'Camara'
     })
-      .then(imageData => {
+      .then(async (imageData) => {
         console.log(imageData);
         imagen.base64 = imageData.base64String;
         imagen.fecha = new Date().toUTCString();
@@ -94,16 +94,11 @@ export class ImagenService {
           carpeta = "feas";
         }
 
-        // Se sube imagen a Base de Datos
-        this.crear(imagen).then( img => {
-          imagen = imagen;
-          // Se guarda imagen en el Storage
-          this.guardarImagen(imagen, carpeta)
-              .then(snapshot => snapshot.ref.getDownloadURL()
-                                        .then(res => imagen.url = res))
-              .finally(() => this.actualizar(imagen));
-        })
-        .catch(console.error);
+        const imagenRef= await this.crear(imagen);
+        imagen.id = imagenRef.key;
+        const snapshot = await this.guardarImagen(imagen, carpeta);
+        imagen.url = await snapshot.ref.getDownloadURL();
+        await this.actualizar(imagen);
       })
       .catch(error => {
         this.presentToast(error);

@@ -1,4 +1,5 @@
 import { AfterViewChecked, Component, DoCheck, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { Mensaje } from 'src/app/clases/mensaje';
 import { Usuario } from 'src/app/clases/usuario';
@@ -16,8 +17,10 @@ export class Sala4bPage implements OnInit, DoCheck {
   mensajes: Mensaje[];
   textoAuxiliar : string;
   color: string = "primary";
+  chatForm:FormGroup;
 
-  constructor(private dataService: DataService, private mensajeService: MensajesService) 
+
+  constructor(private dataService: DataService, private mensajeService: MensajesService, private form:FormBuilder) 
   {
     this.mensajes = MensajesService.mensajes.filter(msj => msj.sala == Salas._4B);
   
@@ -30,11 +33,15 @@ export class Sala4bPage implements OnInit, DoCheck {
   ngOnInit() 
   {
     this.cargarDatos();
+    this.chatForm = this.form.group({
+      mensaje: ['', [Validators.required, Validators.maxLength(21)]],
+    });
   }
 
   enviar()
   {
     this.mensaje = new Mensaje();
+    this.textoAuxiliar = this.chatForm.value.mensaje;
     console.log(this.textoAuxiliar);
     if(this.textoAuxiliar)
     {

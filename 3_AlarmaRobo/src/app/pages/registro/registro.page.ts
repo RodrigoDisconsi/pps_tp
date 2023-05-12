@@ -93,6 +93,12 @@ export class RegistroPage implements OnInit {
       }
       else{
         retorno = 'Debe contener solo números';
+        if(field == 'dni'){
+          retorno = retorno + " y 8 caracteres.";
+        }
+        else{
+          retorno = retorno + " y 10 caracteres.";
+        }
       }
     }
     else if(this.registerControls[field].hasError('minlength')){
