@@ -59,19 +59,24 @@ export class GraficoBarrasComponent implements OnInit {
 
       this.fotos.forEach(foto => 
       {
-        if (new Date(foto.fecha).getDay() == dia) 
-        {
-          console.log(foto);
-
-          if (foto.votos.length > mayorVotos) 
-          {
-            mayorVotos = foto.votos.length;
-            imgSrc = foto.url;
-            auxiliar = {
-              name: new Date(foto.fecha).toISOString(),
-              y: foto.votos.length
-            };
-          }
+        let votoActual = 0;
+        if(foto.votos){
+          foto.votos.forEach(voto => {
+            const fecha = new Date(voto.fecha);
+            if (fecha.getDay() == dia) 
+            {
+              votoActual++;
+              if (votoActual > mayorVotos) 
+              {
+                mayorVotos = votoActual;
+                imgSrc = foto.url;
+                auxiliar = {
+                  name: fecha.getDate() + '/' + fecha.getMonth() + '/' + fecha.getFullYear(),
+                  y: mayorVotos
+                };
+              }
+            }
+          });
         }
       });
       if(auxiliar)

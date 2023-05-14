@@ -22,8 +22,6 @@ export class BonitasPage implements OnInit, DoCheck {
               private loadingController: LoadingController,
               private toastController: ToastController) 
   {
-    this.usuario = new Usuario();
-    // Cargo el usuario logueado
     this.dataService.obtenerLocal()
         .then( data => {
           this.usuario = Object.assign(new Usuario, data);
@@ -43,7 +41,7 @@ export class BonitasPage implements OnInit, DoCheck {
     
   }
 
-  async subirFoto() 
+  subirFoto() 
   {
     this.imagenService.sacarFoto(this.usuario, TipoImagen.POSITIVA)
                       .then(imagen => this.usuario.imagenes.push(imagen.id))

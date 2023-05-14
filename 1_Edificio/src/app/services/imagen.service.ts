@@ -64,7 +64,7 @@ export class ImagenService {
 
       // Se sube imagen a Base de Datos
       this.crear(imagen).then( img => {
-        imagen = imagen;
+        imagen = img;
         // Se guarda imagen en el Storage
         this.guardarImagen(imagen, carpeta)
             .then(snapshot => snapshot.ref.getDownloadURL()
@@ -106,13 +106,13 @@ export class ImagenService {
   private async crear(imagen: Imagen)
   {
     // console.log(imagen);
-    // database().ref('imagenes')
-    //                 .push()
-    //                 .then( snapshot => imagen.id = snapshot.key)
-    //                 .catch(() => console.info("No se pudo realizar alta"));
-    // return imagen;
-    return this.db.list('/imagenes')
-    .push(imagen);
+    database().ref('imagenes')
+                    .push()
+                    .then( snapshot => imagen.id = snapshot.key)
+                    .catch(() => console.info("No se pudo realizar alta"));
+    return imagen;
+    // return this.db.list('/imagenes')
+    // .push(imagen);
   }
 
   public actualizar(imagen: Imagen): Promise<any>
@@ -174,21 +174,21 @@ export class ImagenService {
   public fetchUsuario(id: string)
   {
     ImagenService.fotosUsuario = ImagenService.imagenes.filter( img => img.usuario == id)
-                                                      .sort((a,b)=>this.comparadorFechas(a,b));
+                                                      .sort((a,b)=>this.comparadorFechas(a,b)) ?? [];
   }
 
   public getFeas()
   {
     ImagenService.fotosFeas = ImagenService.imagenes
                   .filter( img => img.tipo == TipoImagen.NEGATIVA)
-                  .sort((a,b)=>this.comparadorFechas(a,b));
+                  .sort((a,b)=>this.comparadorFechas(a,b)) ?? [];
   }
 
   public getLindas()
   {
     ImagenService.fotosBonitas = ImagenService.imagenes
                   .filter( img => img.tipo == TipoImagen.POSITIVA)
-                  .sort((a,b)=>this.comparadorFechas(a,b));
+                  .sort((a,b)=>this.comparadorFechas(a,b)) ?? [];
   }
 
   async presentToast(message) {

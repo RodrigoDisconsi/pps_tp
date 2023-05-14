@@ -46,30 +46,36 @@ export class GraficoTortaComponent implements OnInit {
   }
 
 
-  procesarDatos() {
+  procesarDatos() 
+  {
     let votosPorDia = [];
 
-    this.semana.forEach(dia => {
+    this.semana.forEach(dia => 
+    {
       let imgSrc = "";
       let mayorVotos = 0;
       let auxiliar;
 
       this.fotos.forEach(foto => 
       {
-        let fechaFoto = new Date(foto.fecha);
-        if (fechaFoto.getDay() == dia) 
-        {
-          console.log(foto);
-
-          if (foto.votos.length > mayorVotos) 
-          {
-            mayorVotos = foto.votos.length;
-            imgSrc = foto.url;
-            auxiliar = {
-              name: fechaFoto.getDate() + '/' + fechaFoto.getMonth() + '/' + fechaFoto.getFullYear(),
-              y: foto.votos.length
-            };
-          }
+        let votoActual = 0;
+        if(foto.votos){
+          foto.votos.forEach(voto => {
+            const fecha = new Date(voto.fecha);
+            if (fecha.getDay() == dia) 
+            {
+              votoActual++;
+              if (votoActual > mayorVotos) 
+              {
+                mayorVotos = votoActual;
+                imgSrc = foto.url;
+                auxiliar = {
+                  name: Dia[fecha.getDay()],
+                  y: mayorVotos
+                };
+              }
+            }
+          });
         }
       });
       if(auxiliar)

@@ -19,10 +19,10 @@ export class ListadoPage implements OnInit {
               private loadingController: LoadingController,
               private toastController: ToastController) { }
 
-  ngOnInit() 
+  async ngOnInit() 
   {
     console.log("FOTOS PROPIAS");
-    this.imagenService.fetchAll();
+    await this.imagenService.fetchAll();
     this.imagenes = ImagenService.fotosUsuario;
   }
 

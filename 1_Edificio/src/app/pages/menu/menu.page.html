@@ -3,10 +3,17 @@
   <ion-toolbar color="dark">
 
       <ion-buttons slot="start">
-        <ion-back-button text="Atrás" defaultHref="/home"></ion-back-button>
+        <ion-back-button text="Cerrar Sesión" style="font-weight: 1px;" defaultHref="/home"></ion-back-button>
       </ion-buttons>
-  
-      <ion-title class="text-big" text-capitalize>Menú</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button size="large" (click)="navegar('/graficos')">
+          <ion-icon slot="icon-only" name="bar-chart-outline" size="large"></ion-icon>
+        </ion-button>
+        <ion-button size="large" (click)="navegar('/listado')">
+          <ion-icon slot="icon-only" name="images-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
 
 
@@ -14,10 +21,9 @@
 
 <ion-content class="fondo">
 
-  <ion-grid fixed >
+  <ion-grid fixed>
     <ion-row class="contenido">
-      <ion-col size="6" style="top: 7%" *ngFor="let ruta of rutas" >
-        <h2 class="ion-text-center"><ion-label class="text"> {{ruta.nombre}}</ion-label></h2>
+      <ion-col size="12" *ngFor="let ruta of rutas" class="ion-margin-top">
         <ion-img id="img-boton" [src]="ruta.src" (click)="navegar(ruta.ruta)"></ion-img>
       </ion-col>
     </ion-row>
