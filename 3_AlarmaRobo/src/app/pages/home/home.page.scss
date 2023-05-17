@@ -1,28 +1,50 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+form{
+  width: 100%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+
+.custom-button{
+  height: 6vh;
+  color: white;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-input{
+  font-size: large;
+  color: #FFC409;
+  font-weight: 500;
+  font-family: cursive;
 }
 
-#container a {
-  text-decoration: none;
+ion-toggle{
+  color: #FFC409;
 }
 
+.custom-label{
+  font-size: large;
+  font-family: cursive;
+}
+
+.custom-label-sm{
+  font-size: small;
+  font-family: cursive;
+}
+
+
+ion-button{
+  font-family: cursive;
+  font-size: medium;
+}
+
+ion-segment{
+  font-family: cursive;
+}
+
+.custom-label-user{
+  font-size: small;
+  font-family: cursive;
+}
+
+ion-img{
+  width: 412px;
+  height: 370px;
+}

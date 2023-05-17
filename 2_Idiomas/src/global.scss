@@ -43,3 +43,25 @@
     top: 47%;
     transform: translateY(-50%);
 }
+
+
+ion-toast{
+    text-align: center !important;
+    font-family: monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    .toast-icon{
+        font-size: xx-large !important;
+    }
+  }
+
+  ion-toast::part(button) {
+    height: auto;
+    width: auto;
+    font-size: 1em; // this sets actual icon size
+  }
+
+  ion-toast::part(container){
+    height: 11vh !important;
+    background-color: rgb(103, 42, 177);
+  }

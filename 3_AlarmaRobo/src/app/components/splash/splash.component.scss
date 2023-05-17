@@ -3,42 +3,46 @@
         .cls-1 {
             opacity: 0;
             transform: rotate3d(1, 1, 0, 50deg);
-            animation: 1s 0.2s ease fadeInAndSpin;
+            animation: 2.5s 0.2s ease fadeInAndSpin;
             animation-fill-mode: forwards;
         }
 
         .cls-2 {
             opacity: 0;
             transform: rotate3d(1, 1, 0, 60deg);
-            animation: 1s 0.4s ease fadeInAndSpin;
+            animation: 2.5s 0.4s ease fadeInAndSpin;
             animation-fill-mode: forwards;
         }
 
         .cls-3 {
             opacity: 0;
             transform: rotate3d(1, 1, 0, 50deg);
-            animation: 1s 0.6s ease fadeInAndSpin;
+            animation: 2.5s 0.6s ease fadeInAndSpin;
             animation-fill-mode: forwards;
         }
 
         .cls-4 {
             opacity: 0;
             transform: rotate3d(1, 1, 0, 60deg);
-            animation: 1s 0.8s ease fadeInAndSpin;
+            animation: 2.5s 0.8s ease fadeInAndSpin;
             animation-fill-mode: forwards;
         }
 
         .rotate-center {
-            animation: rotate-center 1s ease-in-out both;
+            animation: rotate-center 1.5s ease-in-out both;
         }
 }
 
 @keyframes rotate-center {
     0% {
+        opacity: 0;
       transform: rotate(0);
+    //   transform: scaleY(0);
     }
     100% {
+        opacity: 1;
       transform: rotate(360deg);
+    //   transform: scaleY(1);
     }
   }
 
@@ -60,7 +64,18 @@
 }
 
 ion-content{
-    --background:#545454;
-    top: 30%;
+    --background: #787272;
+    top: 20%;
     position: absolute;
 }
+
+h1{
+    font-size: 48px;
+    font-family: fantasy;
+    margin-bottom: 0px;
+  }
+
+  img{
+    height: 400px;
+    object-fit: cover;
+  }

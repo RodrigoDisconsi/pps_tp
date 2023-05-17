@@ -183,7 +183,14 @@ export class MenuPage implements OnInit {
       header: 'Atención',
       message,
       mode: "ios",
-      translucent: true
+      cssClass: 'warning-alert', // Clase CSS para estilo de advertencia
+      buttons: [
+        {
+          text: 'Cerrar',
+          role: 'cancel', // Opcional: establece el botón como cancelar
+          cssClass: 'cancel-button' // Clase CSS para estilo del botón de cancelar
+        }
+      ]
     });
   
     await alert.present();

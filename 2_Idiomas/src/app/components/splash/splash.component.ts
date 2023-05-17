@@ -11,8 +11,6 @@ export class SplashComponent implements OnInit {
 
   constructor(public viewCtrl: ModalController, public splashScreen: SplashScreen) 
   {
-    this.splashScreen.hide();
-    //this.splashScreen.hide();
     setTimeout(() => {
      
      this.viewCtrl.dismiss().then(()=> console.log("Dismiss"));

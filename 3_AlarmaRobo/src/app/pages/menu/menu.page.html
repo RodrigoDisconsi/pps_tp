@@ -1,37 +1,42 @@
 <app-header titulo="Menú principal"></app-header>
 <ion-content [fullscreen]="true" class="fondo">
 
-    <div class="center-content">
-            <ion-button (click)="activarAlarma()" strong="true" class="boton-grande" color="danger"
-                        expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
-                <!-- <ion-icon class="icon" name="warning-outline"></ion-icon> -->
-                <ion-img src="../../../assets/img/buttom-alarm.webp"></ion-img>
+    <div class="center-content ion-text-center">
+        <ion-title>
+            <h1 style="color: #FFC404; font-family: cursive;" class="bienvenido">BIENVENIDO</h1>
+            <h1> - </h1>
+            <h1 style="font-family: cursive;">PRESIONE PARA ACTIVAR</h1>
+        </ion-title>
+        <ion-icon name="arrow-down-circle" color="warning"></ion-icon>
+            <ion-button *ngIf="estado == 1" (click)="desactivarAlarma()" strong="true" class="boton-grande" color="danger"
+                        expand="full" fill="solid" shape="round" [disabled]="!passwordForm.valid">
+                <ion-img src="../../../assets/img/alarm-on.png"></ion-img>
             </ion-button>
-
-        <ion-item class="fondo" style="margin-top: 2rem;">
-            <ion-label *ngIf="estado == 1" class="ion-text-center" color="danger"><h1>Alarma activada</h1></ion-label>
-            <ion-label *ngIf="estado == 0" class="ion-text-center" color="dark"><h1>Alarma desactivada</h1></ion-label>
-        </ion-item>
-        <form [formGroup]="passwordForm" (ngSubmit)="desactivarAlarma()" novalidate>
-            <ion-item *ngIf="estado == 1" class="fondo">
-                <ion-label position="floating" color="dark">Ingrese su contraseña para desactivar</ion-label>
-                <ion-input formControlName="password" type="password"></ion-input>
-            </ion-item>
-            <ion-note *ngIf="isSubmitted && errorControl.password.errors?.required" class="error-msg">
-                La contraseña es requerida.
-            </ion-note>
-            <ion-note *ngIf="isSubmitted && errorControl.password.errors?.minlength" class="error-msg">
-                Al menos 6 caracteres
-            </ion-note>
-            <ion-button *ngIf="estado == 1" size="large"
-            expand="block" fill="solid" shape="round" type="submit" style="margin-top: 3rem;">
-            DESACTIVAR
+            <ion-button *ngIf="estado == 0" (click)="activarAlarma()" strong="true" class="boton-grande" color="warning"
+            expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
+                <ion-img src="../../../assets/img/alarm-off.png"></ion-img>
             </ion-button>
-        </form>
-
+            <form [formGroup]="passwordForm" (ngSubmit)="desactivarAlarma()">
+                <ion-item *ngIf="estado == 1" class="fondo">
+                    <ion-label class="custom-label" position="floating" color="dark">Ingrese su contraseña para desactivar</ion-label>
+                    <ion-input formControlName="password" type="password"></ion-input>
+                </ion-item>
+                <ion-note *ngIf="isSubmitted && errorControl.password.errors?.required" class="error-msg custom-label-sm">
+                    La contraseña es requerida.
+                </ion-note>
+                <ion-note *ngIf="isSubmitted && errorControl.password.errors?.minlength" class="error-msg custom-label-sm">
+                    Al menos 6 caracteres
+                </ion-note>
+            </form>
     
     </div>
 
 
 
 </ion-content>
+
+<ion-footer class="ion-color-dark text-center">
+    <ion-title>
+        <h1 style="color: #FFC404" class="bienvenido">ALARMATOR</h1>
+    </ion-title>
+</ion-footer>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, PopoverController, ToastController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/clases/usuario';
 import { PopinfoComponent } from 'src/app/components/popinfo/popinfo.component';
 import { AudioService } from 'src/app/services/audio.service';
@@ -17,20 +18,23 @@ export class InicioPage implements OnInit {
   registro = "../assets/img/register.webp";
   mensaje: string;
   usuario: Usuario = new Usuario();
+  selectUser: Subject<{mail:string, pass:string, rol:string}> = new Subject();
 
   constructor(public alertCtrl: AlertController, 
               private dataService: DataService,
               public toastController: ToastController,
               private router: Router,
-              private popoverCtrl: PopoverController,
-              private audioService: AudioService) { }
+              private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
-    
+    this.selectUser.subscribe(async (user) => {
+      console.log(user);
+      this.popoverCtrl.dismiss();
+      await this.promptSignIn(user);
+    })
   }
 
-
-  async promptSignIn() {
+  async promptSignIn(data?:{mail:string, pass:string, rol:string}) {
     const alert = await this.alertCtrl.create({
       translucent: true,
       mode: "md",
@@ -39,71 +43,14 @@ export class InicioPage implements OnInit {
           name: 'email',
           type: 'text',
           placeholder: 'Ingrese su email',
+          value: data?.mail ?? '',
           
         },
         {
           name: 'password',
           type: 'password',
           placeholder: 'Ingrese su contraseña',
-          attributes: {
-            minLength: 6
-          }
-        }
-        
-
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: (data) => {
-            this.usuario.email = data.email;
-            this.usuario.pass = data.password;
-
-            if(this.validarMail(data.email) && this.validarPassword(data.password))
-            {
-              this.dataService.login(this.usuario).
-              then(()=>{
-                this.mensaje = "Sesión iniciada.";
-                this.router.navigate(['/menu']);
-              }).
-              catch( error => this.mensaje = error).
-              finally(() => this.presentToast());
-            }
-            else
-            {
-              this.mensaje = "Revisar email o contraseña";
-              this.presentToast();
-            }
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
-  async promptSignUp() {
-    const alert = await this.alertCtrl.create({
-      translucent: true,
-      mode: "md",
-      inputs: [
-        {
-          name: 'email',
-          type: 'text',
-          placeholder: 'Ingrese su email',
-          
-        },
-        {
-          name: 'password',
-          type: 'password',
-          placeholder: 'Ingrese su contraseña',
+          value: data?.pass ?? '',
           attributes: {
             minLength: 6
           }
@@ -112,8 +59,10 @@ export class InicioPage implements OnInit {
           name: 'confirmacion',
           type: 'password',
           placeholder: 'Confirme su contraseña',
+          value: data?.pass ?? '',
           attributes: {
-            minLength: 6
+            minLength: 6,
+            required: true,
           }
         },
       ],
@@ -128,29 +77,29 @@ export class InicioPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            console.log(data);
-           
-            if(data.password === data.confirmacion && 
-              this.validarMail(data.email) && 
-              this.validarPassword(data.password))
-            {
+            if(!this.validarMail(data.email)){
+              this.mensaje = "Mail inválido";
+            }
+            else if(!this.validarPassword(data.password)){
+              this.mensaje = "Password inválida";
+            }
+            else if(!(data.password === data.confirmacion)){
+              this.mensaje = "Contraseñas no coinciden";
+            }
+            else{
               this.usuario.email = data.email;
               this.usuario.pass = data.password;
 
-              this.dataService.registrar(this.usuario).
+              this.dataService.login(this.usuario).
               then(()=>{
-                this.mensaje = "Alta exitosa.";
-                this.router.navigate(['/menu']);
+                this.mensaje = "Sesión iniciada.";
+                this.router.navigate(['/menu/']);
               }).
-              catch( error => this.mensaje = error).
+              catch( error => this.mensaje = 'Credenciales inválidas.').
               finally(() => this.presentToast());
+              return;
             }
-            else
-            {
-              this.mensaje = "Revisar email o contraseña";
-              this.presentToast();
-            }
-            
+            this.presentToast();
           }
         }
       ]
@@ -162,7 +111,17 @@ export class InicioPage implements OnInit {
   async presentToast() {
     const toast = await this.toastController.create({
       message: this.mensaje,
-      duration: 2000
+      position: 'top',
+      duration: 20000,
+      buttons: [
+        {
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
     });
     toast.present();
   }
@@ -191,6 +150,7 @@ export class InicioPage implements OnInit {
   {
     const popover = await this.popoverCtrl.create({
       component: PopinfoComponent,
+      componentProps: {selectUser: this.selectUser},
       event: evento,
       mode: 'ios'
     });

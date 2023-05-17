@@ -19,6 +19,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ReactiveFormsModule,
     FormsModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  exports: [LoginPage]
 })
 export class LoginPageModule {}

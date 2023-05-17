@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Platform, ViewWillEnter } from '@ionic/angular';
 import { AudioService, Idioma, ILenguajeSeleccionado } from 'src/app/services/audio.service';
 
@@ -8,20 +9,21 @@ import { AudioService, Idioma, ILenguajeSeleccionado } from 'src/app/services/au
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage implements OnInit, ViewWillEnter {
+export class MenuPage implements OnInit {
   opcion: ILenguajeSeleccionado;
-  slides: { img: string, route: string }[] = [
+  selectedTheme;
+  themes: { img: string, route: string }[] = [
     {
       img: '/assets/img/animales_1.jpg',
-      route: '/animales'
+      route: '/menu/animales'
     },
     {
       img: '/assets/img/colores_1.jpg',
-      route: '/colores'
+      route: '/menu/colores'
     },
     {
       img: '/assets/img/numeros_2.jpg',
-      route: '/numeros'
+      route: '/menu/numeros'
     },
   ];
 
@@ -40,17 +42,24 @@ export class MenuPage implements OnInit, ViewWillEnter {
     }
   ];
 
-  constructor(private audioService: AudioService, private platform: Platform) 
+  constructor(private router:Router) 
   {
     this.opcion = AudioService.idiomaSeleccionado; 
+    this.selectedTheme = this.themes[0];
     
-  }
-  ionViewWillEnter(): void {
-    // por defecto Español
-    console.log("View ENTER");
   }
 
   ngOnInit() {
+    console.log(this.router.url);
+    if(this.router.url.includes('animales')){
+      this.selectedTheme = this.themes[0];
+    }
+    else if(this.router.url.includes('colores')){
+      this.selectedTheme = this.themes[1];
+    }
+    else{
+      this.selectedTheme = this.themes[2];
+    }
   }
 
   seleccionar(opcion: ILenguajeSeleccionado)
@@ -60,5 +69,12 @@ export class MenuPage implements OnInit, ViewWillEnter {
 
     AudioService.idiomaSeleccionado = this.opcion;
     console.log(AudioService.idiomaSeleccionado);
+  }
+
+  seleccionarTheme(theme)
+  {   
+    this.selectedTheme = theme;
+    console.log(theme.route);
+    this.router.navigateByUrl(theme.route);
   }
 }

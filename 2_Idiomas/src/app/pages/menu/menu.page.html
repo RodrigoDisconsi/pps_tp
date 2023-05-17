@@ -1,19 +1,13 @@
 <ion-content class="ion-padding">
 
 
-  <ion-grid fixed class="centrado">
-    <ion-row class="ion-margin-top">
-      <ion-col size="12" size-md="6" size-sm="4" size-lg="12" *ngFor="let slide of slides">
+  <ion-router-outlet></ion-router-outlet>
 
-        <div class="ion-activatable">
-          <img [src]="slide.img" class="slide-image" [routerLink]="slide.route">
-  
-          <ion-ripple-effect type="bounded"></ion-ripple-effect>
-        </div>
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button [routerLink]="['/inicio']" color="success">
+      <ion-icon size="large" name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="danger">
     <ion-fab-button color="danger">
@@ -27,9 +21,14 @@
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
-    <ion-fab-button [routerLink]="['/inicio']" color="success">
-      <ion-icon name="play-back"></ion-icon>
+    <ion-fab-button color="success">
+      <img [src]="selectedTheme.img">
     </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let theme of themes" (click)="seleccionarTheme(theme)" color="success">
+        <img [src]="theme.img" alt="bandera.idioma">
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 
 

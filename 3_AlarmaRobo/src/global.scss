@@ -33,11 +33,35 @@
 }
 
 .contenido{
-    background: rgba(255,255,255,0.5) !important;
-    opacity: 95% !important;
+    background: #FFC409 !important;
 }
 
 .center-content{
     margin-left: auto !important;
      margin-right: auto !important;
  }
+
+ .alert-wrapper{
+    background-color: #FFCC00 !important; /* Color de fondo de la alerta de advertencia */
+ }
+  
+  .cancel-button {
+    color: white !important; /* Color del botón de cancelar */
+    font-size: x-large !important;
+    font-family: monospace;
+    font-weight: bolder !important;
+  }
+
+  .alert-title{
+    color: white !important; /* Color del botón de cancelar */
+    font-size: xx-large !important;
+    font-family: monospace;
+    font-weight: bolder;
+  }
+
+  .alert-message{
+    font-size: large !important;
+    font-family: monospace;
+    font-weight: bolder !important;
+    color: white !important; /* Color del botón de cancelar */
+  }

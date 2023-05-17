@@ -12,13 +12,6 @@ export class NumerosPage implements OnInit {
   numeros: { nombre,img, audio_es, audio_en, audio_pt }[] = 
   [
     {
-      nombre: "0",
-      img: "/assets/img/0.jpg",
-      audio_es: "assets/audio/cero_es.mp3",
-      audio_en: "assets/audio/0_en.mp3",
-      audio_pt: "assets/audio/0_pt.mp3"
-    },
-    {
       nombre: "1",
       img: "/assets/img/1.jpg",
       audio_es: "assets/audio/uno_es.mp3",
@@ -52,42 +45,7 @@ export class NumerosPage implements OnInit {
       audio_es: "assets/audio/cinco_es.mp3",
       audio_en: "assets/audio/5_en.mp3",
       audio_pt: "assets/audio/5_pt.mp3"
-    },
-    {
-      nombre: "6",
-      img: "/assets/img/6.jpg",
-      audio_es: "assets/audio/seis_es.mp3",
-      audio_en: "assets/audio/6_en.mp3",
-      audio_pt: "assets/audio/6_pt.mp3"
-    },
-    {
-      nombre: "7",
-      img: "/assets/img/7.jpg",
-      audio_es: "assets/audio/siete_es.mp3",
-      audio_en: "assets/audio/7_en.mp3",
-      audio_pt: "assets/audio/7_pt.mp3"
-    },
-    {
-      nombre: "8",
-      img: "/assets/img/8.jpg",
-      audio_es: "assets/audio/ocho_es.mp3",
-      audio_en: "assets/audio/8_en.mp3",
-      audio_pt: "assets/audio/8_pt.mp3"
-    },
-    {
-      nombre: "9",
-      img: "/assets/img/9.jpg",
-      audio_es: "assets/audio/nueve_es.mp3",
-      audio_en: "assets/audio/9_en.mp3",
-      audio_pt: "assets/audio/9_pt.mp3"
-    },
-    {
-      nombre: "10",
-      img: "/assets/img/10.jpg",
-      audio_es: "assets/audio/diez_es.mp3",
-      audio_en: "assets/audio/10_en.mp3",
-      audio_pt: "assets/audio/10_pt.mp3"
-    },
+    }
   ];
 
   banderas : ILenguajeSeleccionado[] = [

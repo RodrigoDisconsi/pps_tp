@@ -6,7 +6,26 @@ import { MenuPage } from './menu.page';
 const routes: Routes = [
   {
     path: '',
-    component: MenuPage
+    redirectTo: 'colores',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: MenuPage,
+    children: [
+      {
+        path: 'animales',
+        loadChildren: () => import('../../pages/animales/animales.module').then(m => m.AnimalesPageModule)
+      },
+      {
+        path: 'colores',
+        loadChildren: () => import('../../pages/colores/colores.module').then(m => m.ColoresPageModule)
+      },
+      {
+        path: 'numeros',
+        loadChildren: () => import('../../pages/numeros/numeros.module').then(m => m.NumerosPageModule)
+      }
+    ]
   }
 ];
 
@@ -14,5 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MenuPageRoutingModule {}
- 
+export class MenuPageRoutingModule { }

@@ -15,24 +15,16 @@ import { AudioService } from './services/audio.service';
 export class AppComponent {
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private modalCtrl: ModalController,
     private router: Router,
     private audioService: AudioService
   ) {
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       this.presentModal();
       this.audioService.cargarAudio().then(() =>{
        this.router.navigate(['/inicio']);
       })
-    });
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();      
     });
   }
 

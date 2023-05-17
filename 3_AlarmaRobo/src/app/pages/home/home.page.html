@@ -6,42 +6,74 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="fondo" style="top: 25%;">
+<ion-content [fullscreen]="true" class="fondo">
+
+  <ion-img [src]="'../../../assets/img/icon.png'"></ion-img>
 
   
-
   <ion-list class="contenido" color="dark" inset="false">
 
-    <ion-item-divider color="dark">
-    </ion-item-divider>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitTemplate()">
 
-    <ion-item color="dark">
-      <ion-button class="center-content" size="large" routerLink="/login" 
-                  routerLinkActive="router-link-active" expand="full" fill="clear">
-                  Iniciar sesión
-      </ion-button>
       
-    </ion-item>
+      <ion-item-divider color="warning">
+      </ion-item-divider>
 
-    <ion-item-divider color="dark">
-    </ion-item-divider>
+        <ion-item class="fondo">
+          <ion-label class="custom-label" position="floating" color="dark"><strong>Email</strong></ion-label>
+          <ion-input formControlName="email" type="text"></ion-input>
+        </ion-item>
+        <ion-note *ngIf="isNotValidField('email')" class="error-msg custom-label-sm">
+          {{getErrorMessage('email')}}
+        </ion-note>
 
+        <ion-item-divider color="dark">
+        </ion-item-divider>
+  
+        <ion-item class="fondo">
+          <ion-label class="custom-label" position="floating" color="dark"><strong>Contraseña</strong></ion-label>
+          <ion-input formControlName="pass" type="password"></ion-input>
+        </ion-item>
+    
+        <ion-note *ngIf="isNotValidField('pass')" class="error-msg custom-label-sm">
+          {{getErrorMessage('pass')}}
+        </ion-note>
+      
+    
     <ion-item color="dark">
-      <ion-button size="large" routerLink="/registro" class="center-content"
-                  expand="full" fill="clear" routerLinkActive="router-link-active">
-                  Nuevo usuario
-      </ion-button>
-    </ion-item>
-
-    <ion-item-divider color="dark">
-    </ion-item-divider>
+      <ion-button class="center-content custom-button" size="large"
+      routerLinkActive="router-link-active" expand="full" fill="clear" [disabled]="loginForm.invalid" type="submit">
+      Ingresar
+    </ion-button>
+    
+  </ion-item>
+</form>
 
   </ion-list>
+
+ <ion-list class="contenido contenido-usuarios">
+  <ion-item color="dark">
+    <ion-label class="custom-label-user">ADMINISTRADOR</ion-label>
+    <ion-toggle [(ngModel)]="checkAdmin" (ionChange)="cargarSesion($event, 'admin')"></ion-toggle>
+  </ion-item>
+  
+  <ion-item color="dark">
+    <ion-label class="custom-label-user">USUARIO</ion-label>
+    <ion-toggle [(ngModel)]="checkUsuario" (ionChange)="cargarSesion($event, 'usuario')" color="success"></ion-toggle>
+  </ion-item>
+  
+  <ion-item color="dark">
+    <ion-label class="custom-label-user">TESTER</ion-label>
+    <ion-toggle [(ngModel)]="checkTester" (ionChange)="cargarSesion($event, 'tester')" color="warning"></ion-toggle>
+  </ion-item>
+  
+  
+    </ion-list>
   
 
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<!-- <ion-footer class="ion-no-border">
   <ion-toolbar color="dark">
     
     <ion-segment (ionChange)="iniciarSesion($event)" >
@@ -57,4 +89,4 @@
     </ion-segment>
 
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

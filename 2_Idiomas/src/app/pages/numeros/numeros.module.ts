@@ -8,6 +8,7 @@ import { NumerosPageRoutingModule } from './numeros-routing.module';
 
 import { NumerosPage } from './numeros.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ContentModule } from 'src/app/components/content/content.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     NumerosPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ContentModule
   ],
   declarations: [NumerosPage]
 })

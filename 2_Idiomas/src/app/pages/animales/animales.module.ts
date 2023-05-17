@@ -8,6 +8,7 @@ import { AnimalesPageRoutingModule } from './animales-routing.module';
 
 import { AnimalesPage } from './animales.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ContentModule } from 'src/app/components/content/content.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     AnimalesPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ContentModule,
   ],
   declarations: [AnimalesPage]
 })

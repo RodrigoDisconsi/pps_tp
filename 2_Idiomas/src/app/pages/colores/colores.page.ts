@@ -6,7 +6,7 @@ import { AudioService, Idioma, ILenguajeSeleccionado } from 'src/app/services/au
   templateUrl: './colores.page.html',
   styleUrls: ['./colores.page.scss'],
 })
-export class ColoresPage implements OnInit, AfterViewInit {
+export class ColoresPage implements OnInit {
   opcion: ILenguajeSeleccionado;
 
   colores: { nombre,img, audio_es, audio_en, audio_pt }[] = 
@@ -40,13 +40,6 @@ export class ColoresPage implements OnInit, AfterViewInit {
       audio_pt: "assets/audio/verde_pt.mp3"
     },
     {
-      nombre: "Blanco",
-      img: "/assets/img/blanco.svg",
-      audio_es: "assets/audio/blanco_es.mp3",
-      audio_en: "assets/audio/blanco_en.mp3",
-      audio_pt: "assets/audio/blanco_pt.mp3"
-    },
-    {
       nombre: "Negro",
       img: "/assets/img/negro.svg",
       audio_es: "assets/audio/negro_es.mp3",
@@ -76,20 +69,9 @@ export class ColoresPage implements OnInit, AfterViewInit {
     
   }
 
-  ngAfterViewInit()
-  {
-    
-  }
-
   ngOnInit() 
   {
     this.opcion = AudioService.idiomaSeleccionado; 
-  }
-
-  play(audioId: string)
-  {
-    console.log("Audio id: ",audioId);
-    this.audioService.play(audioId);
   }
 
   seleccionar(opcion: ILenguajeSeleccionado)
