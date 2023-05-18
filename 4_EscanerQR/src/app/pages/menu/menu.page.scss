@@ -1,7 +1,7 @@
 .giant
 {
     text-align: center !important;
-    font-size: 80px !important;
+    font-size: 150px !important;
     font-size-adjust: inherit !important;
 }
 
@@ -19,6 +19,13 @@
     width: 100%;
 }
 
+
+h1{
+    font-family: emoji;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
 .fondo{
     background-color: #222428;
 }
@@ -26,3 +33,19 @@
 ion-item{
     background-color: #222428 !important;
 }
+
+.btn-qr{
+    width: 100%;
+    height: 100%;
+}
+
+ion-icon{
+    width: 100%;
+    height: 40vh;
+}
+
+  
+  ion-button{
+    --background: #A63C3C;
+  }
+  

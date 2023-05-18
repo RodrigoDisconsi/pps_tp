@@ -1,11 +1,11 @@
 .boton-grande{
     height: 40vh;
-    width: calc(45vh - 5px);
 }
 
 
 .center-content{
     position: absolute;
+    width: 100%;
 }
 
 ion-item{
@@ -41,23 +41,23 @@ ion-input{
     font-size: x-large;
     color: #FFC409;
     font-weight: 700;
-    font-family: cursive;
+    font-family: fantasy;
   }
 
   .custom-label{
     font-size: large;
-    font-family: cursive;
+    font-family: fantasy;
   }
 
   .custom-label-sm{
     font-size: medium;
-    font-family: cursive;
+    font-family: fantasy;
   }
   
 
   ion-footer{
     text-align: center;
     background-color: #222428;
-    font-family: cursive;
+    font-family: fantasy;
   }
 

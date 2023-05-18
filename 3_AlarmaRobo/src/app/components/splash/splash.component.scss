@@ -35,15 +35,14 @@
 
 @keyframes rotate-center {
     0% {
-        opacity: 0;
-      transform: rotate(0);
-    //   transform: scaleY(0);
-    }
-    100% {
-        opacity: 1;
-      transform: rotate(360deg);
-    //   transform: scaleY(1);
-    }
+        transform: scale(1) rotateZ(0);
+      }
+      50% {
+        transform: scale(2) rotateZ(180deg);
+      }
+      100% {
+        transform: scale(1) rotateZ(360deg);
+      }
   }
 
 @keyframes fadeInAndSpin {
@@ -70,7 +69,7 @@ ion-content{
 }
 
 h1{
-    font-size: 48px;
+    font-size: 35px;
     font-family: fantasy;
     margin-bottom: 0px;
   }

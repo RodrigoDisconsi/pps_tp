@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ActionSheetController, ToastController } from '@ionic/angular';
+import { ActionSheetController, LoadingController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/clases/usuario';
 import { DataService } from 'src/app/services/data.service';
 import { environment } from 'src/environments/environment';
@@ -10,22 +11,43 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  usuario: Usuario;
+export class HomePage implements OnInit {
+  usuario: Usuario = new Usuario();
   perfiles = environment.usuario;
   rol: string = "";
+  loginForm: FormGroup;
 
-  constructor(private router: Router, 
-              private actionSheetCtrl: ActionSheetController,
-              public toastController: ToastController,
-              private dataService: DataService,) {}
+  constructor(private router: Router,
+    private actionSheetCtrl: ActionSheetController,
+    private toastController: ToastController,
+    private dataService: DataService,
+    private loadingController: LoadingController,
+    private form: FormBuilder) { }
 
-  segmentChanged(event)
-  {
-    const opcion = event.detail.value;
-
-    this.router.navigate([`/${opcion}`]);
+  ngOnInit(): void {
+    this.loginForm = this.form.group({
+      email: ['', [Validators.required, Validators.email]],
+      pass: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
+
+  onSubmitTemplate() {
+    this.usuario = this.loginForm.value as Usuario;
+    if (this.usuario) {
+      this.dataService.login(this.usuario).then(res => {
+        console.log(res)
+        this.presentLoading("Cargando datos...");
+        this.presentToast("Se ha registrado exitosamente");
+        this.router.navigate(['/menu']);
+
+      }, error => {
+        console.error(error);
+        this.presentToast(error.message);
+      });
+    }
+
+  }
+
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -36,56 +58,37 @@ export class HomePage {
         role: 'close',
         icon: 'person-add-outline',
         handler: () => {
-          this.iniciarSesion('Admin');
+          this.iniciarSesion('admin');
         }
       }, {
         text: 'Tester',
         role: 'close',
         icon: 'construct-outline',
         handler: () => {
-          this.iniciarSesion('Tester');
+          this.iniciarSesion('tester');
         }
       }, {
         text: 'Usuario',
         role: 'close',
         icon: 'person',
         handler: () => {
-          this.iniciarSesion('Usuario');
+          this.iniciarSesion('usuario');
         }
       }]
     });
     await actionSheet.present();
   }
 
-  iniciarSesion(valor: string)
-  {
-      this.usuario = new Usuario();
-     this.rol = valor;
-  
-      switch(this.rol)
-      {
-        case 'Admin' :
-          this.usuario.email = this.perfiles.admin.email;
-          this.usuario.pass = this.perfiles.admin.pass;
-          this.usuario.rol = this.perfiles.admin.rol;
-          break;
-        case 'Tester' :
-          this.usuario.email = this.perfiles.tester.email;
-          this.usuario.pass = this.perfiles.tester.pass;
-          this.usuario.rol = this.perfiles.tester.rol;
-          break;
-        case 'Usuario' :
-          this.usuario.email = this.perfiles.usuario.email;
-          this.usuario.pass = this.perfiles.usuario.pass;
-          this.usuario.rol = this.perfiles.usuario.rol;
-          break;
-      }
-      console.log(this.usuario);
-      this.dataService.login(this.usuario).then(async ()=>{
-        await this.presentToast(`Perfil : ${this.usuario.rol}`);
-        this.router.navigate(['/menu']);
-      }).
-      catch( err => this.presentToast(err));
+  iniciarSesion(tipo: string) {
+    this.rol = tipo;
+    this.usuario.email = this.perfiles[tipo].email;
+    this.usuario.pass = this.perfiles[tipo].pass;
+    this.usuario.rol = this.perfiles[tipo].rol;
+
+    console.log(this.loginForm);
+
+    this.loginControls.email.setValue(this.usuario.email);
+    this.loginControls.pass.setValue(this.usuario.pass);
 
   }
 
@@ -95,5 +98,45 @@ export class HomePage {
       duration: 2000
     });
     return toast.present();
+  }
+
+  async presentLoading(message) {
+    const loading = await this.loadingController.create({
+      message,
+      duration: 3000,
+    });
+    await loading.present();
+
+    console.log('Loading dismissed!');
+  }
+
+  get loginControls() {
+    return this.loginForm.controls;
+  }
+
+  getErrorMessage(field: string): string {
+    let retorno = "";
+    if (this.loginControls[field].hasError("required")) {
+      retorno = "El campo es requerido.";
+    }
+    else if (this.loginControls[field].hasError('email')) {
+      retorno = "Formato de mail inválido";
+    }
+    else if (this.loginControls[field].hasError('pattern')) {
+      if ((field == 'nombre' || field == 'apellido')) {
+        retorno = "El campo debe contener solo letras!";
+      }
+      else {
+        retorno = 'Debe contener solo números';
+      }
+    }
+    else if (this.loginControls[field].hasError('minlength')) {
+      retorno = "La contraseña debe contener 6 caracteres mínimo";
+    }
+    return retorno;
+  }
+
+  isNotValidField(field: string): boolean {
+    return (this.loginControls[field].touched && this.loginControls[field].dirty == true);
   }
 }

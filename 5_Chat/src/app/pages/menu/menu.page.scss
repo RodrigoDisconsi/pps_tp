@@ -1,9 +1,21 @@
 .boton-grande{
-    height: 200px !important;
+    height: 39vh;
 }
 
 .container{
     width: 100%;
     position: absolute;
-    top: 17%;
+    top: 13%;
+}
+
+
+h1{
+    font-weight: bolder;
+    margin-top: 20px;
+    font-size: xxx-large;
+    font-family: cursive;
+}
+
+ion-label{
+    font-family: fantasy;
 }

@@ -1,44 +1,26 @@
 <app-header titulo="Menú principal" class="ion-no-margin"></app-header>
 
-<ion-content [fullscreen]="true" color="dark" class="fondo" style="top:10%;">
+<ion-content [fullscreen]="true" color="dark" class="fondo" style="top:5%;">
 
-  <ion-item class="fondo ion-text-center" color="dark" lines="none" style="margin-bottom: 2rem;">
-    <ion-label color="light"><h1><strong>Billetera virtual</strong></h1></ion-label>
+  <ion-item class="fondo ion-text-center" color="dark" lines="none">
+    <ion-label color="light"><h1><strong>BILLETERA VIRTUAL</strong></h1></ion-label>
   </ion-item>
   <div class="center-content" class="fondo" color="dark">
-    <ion-list class="fondo" color="dark" lines="none">
       <div class="ion-activatable" color="dark">
         <ion-item (click)="presentActionSheet()" color="dark ion-text-center">
           <ion-label>
-            <ion-icon size="large"name="qr-code-sharp"></ion-icon>
+            <ion-button class="btn-qr">
+              <ion-icon size="large"name="qr-code-sharp"></ion-icon>
+            </ion-button>
           </ion-label>
         </ion-item>
       </div>
-    </ion-list>
   
     <ion-list class="fondo" color="dark" lines="none">
   
       <ion-item class="giant" color="dark" *ngIf="usuario">
         <ion-label>$ {{ usuario.credito }}</ion-label>
       </ion-item>
-  
-  
-      <ion-item color="dark">
-        <ion-label class="datos ion-text-center"><strong>Datos personales</strong></ion-label>
-      </ion-item>
-      <ion-item color="dark">
-        <ion-label class="datos"> <strong>Nombre: </strong>{{ usuario.nombre  }}</ion-label>
-      </ion-item>
-      <ion-item color="dark">
-        <ion-label class="datos"><strong>D.N.I.: </strong>{{ usuario.dni  }}</ion-label>
-      </ion-item>
-      <ion-item color="dark">
-        <ion-label class="datos"><strong>Teléfono: </strong>{{ usuario.telefono  }}</ion-label>
-      </ion-item>
-      <ion-item color="dark">
-        <ion-label class="datos"><strong>Domicilio: </strong>{{ usuario.domicilio  }}</ion-label>
-      </ion-item>
-      
   
     </ion-list>
   </div>

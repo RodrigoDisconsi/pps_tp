@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/clases/usuario';
@@ -10,49 +11,61 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   perfiles = environment.perfil;
-  mensaje: string;
   usuario: Usuario = new Usuario();
   rol: string = "";
   imgSrc = "../../../assets/img/icon.png";
+  loginForm: FormGroup;
+  selectedUser: boolean = false;
 
   constructor(public alertCtrl: AlertController, 
               private dataService: DataService,
               public toastController: ToastController,
-              private router: Router) 
+              private router: Router,
+              private form: FormBuilder) 
   {}
+
+  ngOnInit(): void {
+    this.loginForm = this.form.group({
+      email: ['', [Validators.required, Validators.email]],
+      pass: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
   
   iniciarSesion(valor)
   {
-     this.rol = valor;
-  
-      switch(this.rol)
-      {
-        case 'Admin' :
-          this.usuario.email = this.perfiles.admin.email;
-          this.usuario.pass = this.perfiles.admin.pass;
-          this.usuario.rol = this.perfiles.admin.rol;
-          break;
-        case 'Tester' :
-          this.usuario.email = this.perfiles.tester.email;
-          this.usuario.pass = this.perfiles.tester.pass;
-          this.usuario.rol = this.perfiles.tester.rol;
-          break;
-        case 'Usuario' :
-          this.usuario.email = this.perfiles.usuario.email;
-          this.usuario.pass = this.perfiles.usuario.pass;
-          this.usuario.rol = this.perfiles.usuario.rol;
-          break;
-      }
-      
-      this.dataService.login(this.usuario).then(()=>{
-        this.presentToast(`Perfil : ${this.usuario.rol}`);
-        this.router.navigate(['/menu']);
-      }).
-      catch( err => this.presentToast(err));
 
+    this.rol = valor;
+    this.usuario.email = this.perfiles[valor].email;
+    this.usuario.pass = this.perfiles[valor].pass;
+    this.usuario.rol = this.perfiles[valor].rol;
+    this.loginControls.email.setValue(this.usuario.email);
+    this.loginControls.pass.setValue(this.usuario.pass);
+
+    this.selectedUser = true;
   }
+
+  get loginControls() {
+    return this.loginForm.controls;
+  }
+
+  onSubmitTemplate() {
+    console.log('Form submit');
+    this.usuario = this.loginForm.value as Usuario;
+
+    this.dataService.login(this.usuario)
+      .then(res => {
+        this.router.navigate(['/menu']);
+      },
+        error => {
+          this.presentToast("Credenciales inválidas")
+        });
+
+    this.usuario = new Usuario();
+    console.log(this.dataService.gerUserDetail());
+  }
+
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -60,6 +73,24 @@ export class HomePage {
       duration: 2000
     });
     toast.present();
+  }
+
+  getErrorMessage(field: string): string {
+    let retorno = "";
+    if (this.loginControls[field].hasError("required")) {
+      retorno = "El campo es requerido.";
+    }
+    else if (this.loginControls[field].hasError('email')) {
+      retorno = "Formato de mail inválido";
+    }
+    else if (this.loginControls[field].hasError('minlength')) {
+      retorno = "La contraseña debe contener 6 caracteres mínimo";
+    }
+    return retorno;
+  }
+
+  isNotValidField(field: string): boolean {
+    return (this.loginControls[field].touched && this.loginControls[field].dirty == true);
   }
 
 }

@@ -80,4 +80,24 @@ export class ChatComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     return estilo;
   }
+
+  cambiarColorChat()
+  {
+    let estilo;
+
+    if(this.color == 'primary')
+    {
+      estilo = {
+        'background-color': 'var(--ion-color-primary, #3880ff)'
+      }
+    }
+    else if(this.color == 'secondary')
+    {
+      estilo = {
+        'background-color': 'var(--ion-color-secondary, #3dc2ff)'
+      }
+    }
+
+    return estilo;
+  }
 }

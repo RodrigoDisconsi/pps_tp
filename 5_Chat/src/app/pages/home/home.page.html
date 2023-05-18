@@ -12,41 +12,56 @@
     <ion-fab-button color="light">
       <ion-icon name="log-in-sharp"></ion-icon>
     </ion-fab-button>
-
+    
     <ion-fab-list side="bottom">
-      <ion-fab-button (click)="iniciarSesion('Admin')" color="success">
+      <ion-fab-button (click)="iniciarSesion('admin')" color="success">
         <ion-icon name="construct-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="iniciarSesion('Tester')" color="medium">
+      <ion-fab-button (click)="iniciarSesion('tester')" color="medium">
         <ion-icon name="bug-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button (click)="iniciarSesion('Usuario')" color="primary">
+      <ion-fab-button (click)="iniciarSesion('usuario')" color="primary">
         <ion-icon name="body-outline"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-
+    
   </ion-fab>
+  <ion-img [src]="imgSrc" style="width: 450px; height: 450px;"></ion-img>
 
-    <ion-toolbar color="dark">
-      <h1>
-        <ion-title translucent ><br>
-          <ion-icon color="dark" slot="end" name="chatbox-ellipses-outline"></ion-icon>
-        </ion-title>
-      </h1>
-      
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmitTemplate()">
+
+    <ion-title class="ion-text-center title-container">
+      <h1 class="title">Iniciar Sesión</h1>
+    </ion-title>
+    
+
+    <ion-item color="dark" [ngClass]="{'item-has-focus': selectedUser}">
+      <ion-label position="floating" class="custom-label">Email</ion-label>
+      <ion-input type="email" placeholder="Ingrese su mail" name="email" formControlName="email" required>
+      </ion-input>
+    </ion-item>
+    <ion-note color="dark" *ngIf="isNotValidField('email')" class="error-msg custom-label-sm">
+      {{getErrorMessage('email')}}
+    </ion-note>
+
+    <ion-item color="dark" [ngClass]="{'item-has-focus': selectedUser}">
+      <ion-label position="floating" class="custom-label">Contraseña</ion-label>
+      <ion-input formControlName="pass" type="password" placeholder="Ingrese su Contraseña" name="pass"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-note color="dark" *ngIf="isNotValidField('pass')" class="error-msg custom-label-sm">
+      {{getErrorMessage('pass')}}
+    </ion-note>
+    
+  
+    <ion-toolbar color="dark" class="ion-padding-bottom content-submit">
+      <ion-button color="danger" size="large" [disabled]="loginForm.invalid" expand="block" type="submit">
+        INGRESAR
+      </ion-button>
     </ion-toolbar>
 
-    <ion-img class="img" [src]="imgSrc"></ion-img>
+</form>
 
 </ion-content>
-<ion-footer >
-  <ion-toolbar color="dark" class="ion-padding-bottom">
-    <ion-button color="danger" size="large" [routerLink]="['/login']" expand="block">
-      INGRESAR
-    </ion-button>
-
-    <ion-button color="danger" size="large" [routerLink]="['/registro']" expand="block">
-      REGISTRAR
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

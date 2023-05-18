@@ -26,8 +26,34 @@
   text-decoration: none;
 }
 
-.img{
-  margin-top: 7rem;
-  margin-left: 1.3rem;
-  width: 90%;
+.title-container{
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+}
+
+.title{
+  font-size: 40px !important;
+  font-family: cursive;
+  font-weight: bolder;
+}
+
+.custom-label{
+  font-size: x-large;
+  font-family: cursive;
+  font-weight: bolder;
+}
+
+.custom-label-sm{
+  font-size: medium;
+  font-family: cursive;
+}
+
+ion-input{
+  font-size: large;
+  font-weight: bold;
+  font-family: cursive;
+}
+
+.content-submit{
+  margin-top: 3vh;
 }
