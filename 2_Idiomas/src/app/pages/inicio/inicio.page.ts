@@ -42,7 +42,7 @@ export class InicioPage implements OnInit {
         {
           name: 'email',
           type: 'text',
-          placeholder: 'Ingrese su email',
+          placeholder: 'Ingrese su correo',
           value: data?.mail ?? '',
           
         },
@@ -78,7 +78,7 @@ export class InicioPage implements OnInit {
           text: 'Ok',
           handler: (data) => {
             if(!this.validarMail(data.email)){
-              this.mensaje = "Mail inválido";
+              this.mensaje = "Correo electronico inválido";
             }
             else if(!this.validarPassword(data.password)){
               this.mensaje = "Password inválida";

@@ -11,17 +11,17 @@ export const environment = {
   },
   usuario: {
     admin: {
-      email: "admin@mail.com",
+      email: "admin@admin.com",
       pass: "123456",
       rol : "Administrador"
     },
     tester: {
-      email: "tester@mail.com",
+      email: "tester@tester.com",
       pass: "123456",
       rol : "Tester"
     },
     usuario: {
-      email: "usuario@mail.com",
+      email: "usuario@usuario.com",
       pass : "123456",
       rol : "Usuario"
     }

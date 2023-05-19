@@ -36,8 +36,8 @@
     
 
     <ion-item color="dark" [ngClass]="{'item-has-focus': selectedUser}">
-      <ion-label position="floating" class="custom-label">Email</ion-label>
-      <ion-input type="email" placeholder="Ingrese su mail" name="email" formControlName="email" required>
+      <ion-label position="floating" class="custom-label">Correo electronico</ion-label>
+      <ion-input type="email" placeholder="Ingrese su correo" name="email" formControlName="email" required>
       </ion-input>
     </ion-item>
     <ion-note color="dark" *ngIf="isNotValidField('email')" class="error-msg custom-label-sm">
@@ -46,7 +46,7 @@
 
     <ion-item color="dark" [ngClass]="{'item-has-focus': selectedUser}">
       <ion-label position="floating" class="custom-label">Contraseña</ion-label>
-      <ion-input formControlName="pass" type="password" placeholder="Ingrese su Contraseña" name="pass"
+      <ion-input formControlName="pass" type="password" placeholder="Ingrese su contraseña" name="pass"
         required>
       </ion-input>
     </ion-item>

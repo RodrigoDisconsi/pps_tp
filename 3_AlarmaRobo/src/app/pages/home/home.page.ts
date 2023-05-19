@@ -117,7 +117,7 @@ export class HomePage implements OnInit {
       retorno = "El campo es requerido.";
     }
     else if (this.loginControls[field].hasError('email')) {
-      retorno = "Formato de mail inválido";
+      retorno = "Formato inválido";
     }
     else if (this.loginControls[field].hasError('minlength')) {
       retorno = "La contraseña debe contener 6 caracteres mínimo";

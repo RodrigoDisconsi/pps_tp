@@ -17,7 +17,7 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmitTemplate()">
       <ion-item color="dark">
-        <ion-label position="floating" class="custom-label-xl" color="light"><strong>Mail:</strong></ion-label>
+        <ion-label position="floating" class="custom-label-xl" color="light"><strong>Correo Electronico:</strong></ion-label>
         <ion-input class="custom-label-xl" formControlName="email" type="text"></ion-input>
       </ion-item>
       <ion-note *ngIf="isNotValidField('email')" class="error-msg custom-label-l">
@@ -27,7 +27,7 @@
       <div class="divider"></div>
   
       <ion-item color="dark">
-        <ion-label position="floating" class="custom-label-xl" color="light"><strong>Contraseña</strong></ion-label>
+        <ion-label position="floating" class="custom-label-xl" color="light"><strong>Contraseña:</strong></ion-label>
         <ion-input class="custom-label-xl" formControlName="pass" type="password"></ion-input>
       </ion-item>
       <ion-note *ngIf="isNotValidField('pass')" class="error-msg custom-label-l">

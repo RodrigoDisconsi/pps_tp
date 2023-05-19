@@ -1,20 +1,16 @@
-import { AfterContentChecked, Component, OnDestroy, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActionSheetController, AlertController, LoadingController, Platform, ToastController } from '@ionic/angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { Usuario } from 'src/app/clases/usuario';
 import { DataService } from 'src/app/services/data.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-
-import { Observable, interval } from 'rxjs';
-import { rejects } from 'assert';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage implements OnDestroy, OnInit {
+export class MenuPage implements OnInit {
   usuario: Usuario = new Usuario();
   test: Promise<void | Usuario>;
   qrScan: any;
@@ -29,11 +25,8 @@ export class MenuPage implements OnDestroy, OnInit {
     public actionSheetController: ActionSheetController,
     public loadingController: LoadingController,
     private toastController: ToastController,
-    private detector: ChangeDetectorRef,
     private alertController: AlertController,
     private barcodeScanner: BarcodeScanner) {
-    console.log("Constructor");
-
     this.platform.backButton.subscribeWithPriority(0, () => {
       this.qrScan.unsubscribe();
     });
@@ -41,21 +34,14 @@ export class MenuPage implements OnDestroy, OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.cargarDatos();
     this.presentLoading("Cargando datos...");
-
-  }
-
-
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
+    await this.cargarDatos();
   }
 
   async presentLoading(message) {
     const loading = await this.loadingController.create({
       message,
-      duration: 3000,
+      duration: 2000,
     });
 
     loading.present();
@@ -104,17 +90,17 @@ export class MenuPage implements OnDestroy, OnInit {
         this.dataService.fetchQR(barcodeData.text)
           .then(snapshot => {
               this.dataQR = snapshot.val();
+              if(isNaN(this.dataQR)) return;
               this.usuario.credito += this.dataQR;
               this.usuario.codigos.push(barcodeData.text);
 
               this.dataService.actualizar(this.usuario)
                 .then(() => this.presentLoading("Actualizando..."))
-                .finally(() => this.presentToast(`CARGA REALIZADA DE ${this.dataQR}`));
           }
           ).catch(error => { console.log(error) });
         }
         else {
-          this.presentAlert("CÓDIGO YA UTILIZADO");
+          this.presentAlert("QR Utilizado");
         }
         
     },
@@ -139,12 +125,12 @@ export class MenuPage implements OnDestroy, OnInit {
 
   validarCodigo(usuario: Usuario, codigo: string) {
     if (!usuario.codigos.some(aux => aux == codigo) &&
-      usuario.rol != 'admin') {
+      usuario.rol != 'Administrador') {
       //this.test = `El rol del usuario es : ${this.usuario.rol}`;
       return true;
     }
     else if (usuario.codigos.filter(aux => aux == codigo).length < 2 &&
-      usuario.rol == 'admin') {
+      usuario.rol == 'Administrador') {
       //this.test = `El rol del usuario es : ${this.usuario.rol}`;
       return true;
     }
@@ -170,8 +156,16 @@ export class MenuPage implements OnDestroy, OnInit {
 
   async presentAlert(message) {
     const alert = await this.alertController.create({
-      header: 'Atención',
-      message,
+      header: message,
+      mode: "ios",
+      cssClass: 'warning-alert', // Clase CSS para estilo de advertencia
+      buttons: [
+        {
+          text: 'Cerrar',
+          role: 'cancel', // Opcional: establece el botón como cancelar
+          cssClass: 'cancel-button' // Clase CSS para estilo del botón de cancelar
+        }
+      ]
     });
 
     await alert.present();

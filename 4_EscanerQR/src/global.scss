@@ -29,3 +29,28 @@
 {
     background: none transparent !important;
 }
+
+.alert-wrapper{
+    background-color: #A63C3C !important; /* Color de fondo de la alerta de advertencia */
+ }
+  
+  .cancel-button {
+    color: white !important; /* Color del botón de cancelar */
+    font-size: x-large !important;
+    font-family: monospace;
+    font-weight: bolder !important;
+  }
+
+  .alert-title{
+    color: white !important; /* Color del botón de cancelar */
+    font-size: xx-large !important;
+    font-family: monospace;
+    font-weight: bolder;
+  }
+
+  .alert-message{
+    font-size: large !important;
+    font-family: monospace;
+    font-weight: bolder !important;
+    color: white !important; /* Color del botón de cancelar */
+  }

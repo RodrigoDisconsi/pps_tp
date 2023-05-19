@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { mainModule } from 'process';
-import { TipoImagen } from 'src/app/clases/imagen';
 import { Usuario } from 'src/app/clases/usuario';
 import { DataService } from 'src/app/services/data.service';
-import { ImagenService } from 'src/app/services/imagen.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -68,7 +65,7 @@ export class HomePage implements OnInit {
           handler: (data) => {
             this.rol = '';
             if(!this.isEmail(data.mail)){
-              this.presentToast("El mail es inválido", true);
+              this.presentToast("El correo es inválido", true);
             }
             else if(!this.isPassword(data.clave)){
               this.presentToast("La contraseña es inválida", true);

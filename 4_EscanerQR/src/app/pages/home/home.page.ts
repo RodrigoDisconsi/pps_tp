@@ -37,7 +37,6 @@ export class HomePage implements OnInit {
       this.dataService.login(this.usuario).then(res => {
         console.log(res)
         this.presentLoading("Cargando datos...");
-        this.presentToast("Se ha registrado exitosamente");
         this.router.navigate(['/menu']);
 
       }, error => {
@@ -120,7 +119,7 @@ export class HomePage implements OnInit {
       retorno = "El campo es requerido.";
     }
     else if (this.loginControls[field].hasError('email')) {
-      retorno = "Formato de mail inválido";
+      retorno = "Formato inválido";
     }
     else if (this.loginControls[field].hasError('pattern')) {
       if ((field == 'nombre' || field == 'apellido')) {

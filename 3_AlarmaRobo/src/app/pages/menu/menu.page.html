@@ -2,12 +2,8 @@
 <ion-content [fullscreen]="true" class="fondo">
 
     <div class="center-content ion-text-center">
-        <ion-title>
-            <h1 style="color: #FFC404; font-family: fantasy;" class="bienvenido">BIENVENIDO</h1>
-            <h1> - </h1>
-            <h1 style="font-family: fantasy;">PRESIONE PARA ACTIVAR</h1>
-        </ion-title>
-        <ion-icon name="arrow-down-circle" color="warning"></ion-icon>
+        <ion-item-divider color="dark">
+          </ion-item-divider>
             <ion-button *ngIf="estado == 1" (click)="desactivarAlarma()" strong="true" class="boton-grande" color="danger"
                         expand="full" fill="solid" shape="round" [disabled]="!passwordForm.valid">
                 <ion-img src="../../../assets/img/alarm-on.png"></ion-img>
@@ -16,6 +12,8 @@
             expand="full" fill="solid" shape="round" [disabled]="deshabilitarBoton">
                 <ion-img src="../../../assets/img/alarm-off.png"></ion-img>
             </ion-button>
+            <ion-item-divider color="dark">
+            </ion-item-divider>
             <form [formGroup]="passwordForm" (ngSubmit)="desactivarAlarma()">
                 <ion-item *ngIf="estado == 1" class="fondo">
                     <ion-label class="custom-label" position="floating" color="dark">Ingrese su contraseña para desactivar</ion-label>
@@ -34,9 +32,3 @@
 
 
 </ion-content>
-
-<ion-footer class="ion-color-dark text-center">
-    <ion-title>
-        <h1 style="color: #FFC404" class="bienvenido">ALARMATOR</h1>
-    </ion-title>
-</ion-footer>

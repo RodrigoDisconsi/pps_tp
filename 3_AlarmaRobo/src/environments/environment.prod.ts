@@ -11,18 +11,18 @@ export const environment = {
   },
   perfiles: {
     admin: {
-      email: "admin@mail.com",
-      pass: "sarasa",
+      email: "admin@admin.com",
+      pass: "123456",
       rol : "Administrador"
     },
     tester: {
-      email: "tester@mail.com",
-      pass: "sarasa",
+      email: "tester@tester.com",
+      pass: "123456",
       rol : "Tester"
     },
     usuario: {
-      email: "usuario@mail.com",
-      pass : "sarasa",
+      email: "usuario@usuario.com",
+      pass : "123456",
       rol : "Usuario"
     }
   }

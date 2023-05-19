@@ -1,37 +1,38 @@
-<app-header titulo="Menú principal" class="ion-no-margin"></app-header>
+<app-header titulo="BILLETERA VIRTUAL" class="ion-no-margin"></app-header>
 
 <ion-content [fullscreen]="true" color="dark" class="fondo" style="top:5%;">
-
-  <ion-item class="fondo ion-text-center" color="dark" lines="none">
-    <ion-label color="light"><h1><strong>BILLETERA VIRTUAL</strong></h1></ion-label>
-  </ion-item>
   <div class="center-content" class="fondo" color="dark">
-      <div class="ion-activatable" color="dark">
-        <ion-item (click)="presentActionSheet()" color="dark ion-text-center">
-          <ion-label>
-            <ion-button class="btn-qr">
-              <ion-icon size="large"name="qr-code-sharp"></ion-icon>
-            </ion-button>
-          </ion-label>
-        </ion-item>
-      </div>
-  
-    <ion-list class="fondo" color="dark" lines="none">
-  
-      <ion-item class="giant" color="dark" *ngIf="usuario">
-        <ion-label>$ {{ usuario.credito }}</ion-label>
+    <ion-item class="giant" color="dark" *ngIf="usuario">
+      <ion-label style="color: #FFC409;">${{ usuario.credito }}</ion-label>
+    </ion-item>
+
+    <ion-item-divider>
+    </ion-item-divider>
+
+    <ion-title class="ion-text-center">
+            <h4>PRESIONE PARA ESCANEAR</h4>
+    </ion-title>
+    <ion-icon class="icon-custom" name="arrow-down-circle"></ion-icon>
+
+    <div class="ion-activatable" color="dark">
+      <ion-item (click)="presentActionSheet()" color="dark ion-text-center">
+        <ion-label>
+          <ion-button class="btn-qr">
+            <ion-icon size="large" name="qr-code-sharp"></ion-icon>
+          </ion-button>
+        </ion-label>
       </ion-item>
-  
-    </ion-list>
+    </div>
+
+
   </div>
 
 
 </ion-content>
 <ion-footer class="fondo" color="dark">
   <ion-toolbar class="fondo" color="dark">
-    <ion-button (click)="borrarCreditos()" size="large" expand="block" fill="solid"
-    color="medium">
-    Limpiar créditos
-  </ion-button>
+    <ion-button [disabled]="usuario.credito == 0" class="custom-button" (click)="borrarCreditos()" size="large" expand="block" fill="solid">
+      Limpiar créditos
+    </ion-button>
   </ion-toolbar>
 </ion-footer>

@@ -1,5 +1,7 @@
 .boton-grande{
-    height: 40vh;
+    height: 65vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
 }
 
 
@@ -10,11 +12,6 @@
 
 ion-item{
     margin-top: 1rem;
-}
-
-h1{
-    font-weight: 900;
-    font-size: large;
 }
 
 .bienvenido{
@@ -28,13 +25,9 @@ h1{
 }
 
 ion-img{
-    width: 50vh;
-    height: 50vh;
-}
-
-ion-icon{
-    width: 10vh;
-    height: 10vh;
+    width: 70vh !important;
+    height: 70vh !important;
+    object-fit: cover !important;
 }
 
 ion-input{
