@@ -28,7 +28,6 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this.selectUser.subscribe(async (user) => {
-      console.log(user);
       this.popoverCtrl.dismiss();
       await this.promptSignIn(user);
     })
@@ -72,7 +71,6 @@ export class InicioPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
           }
         }, {
           text: 'Ok',
@@ -93,7 +91,7 @@ export class InicioPage implements OnInit {
               this.dataService.login(this.usuario).
               then(()=>{
                 this.mensaje = "Sesión iniciada.";
-                this.router.navigate(['/menu/']);
+                this.router.navigate(['/menu/animales']);
               }).
               catch( error => this.mensaje = 'Credenciales inválidas.').
               finally(() => this.presentToast());
@@ -118,7 +116,6 @@ export class InicioPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           },
         },
       ],

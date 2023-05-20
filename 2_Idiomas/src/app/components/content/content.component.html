@@ -9,21 +9,11 @@
       <ion-col size="12" size-md="4" size-sm="4" size-lg="12" *ngFor="let value of data; let i=index " class="ion-text-center ion-text-center-lg">
 
           <ion-card color="medium">
-              <ion-card-content class="ion-activatable">
+              <ion-card-content class="ion-activatable" (click)="play(value.nombre + '_' + opcion.idioma)">
                   <img [src]="value.img" class="slide-image"
-                        alt="color.nombre" (click)="play(value.nombre + '-' + opcion.idioma)">
+                        alt="color.nombre">
                       <ion-ripple-effect type="bounded">
                       </ion-ripple-effect>
-      
-                  <!-- <img *ngIf="opcion.idioma == 'en'" [src]="value.img" class="slide-image"
-                      (click)="play(value.nombre + '-en')" alt="color.nombre">
-                      <ion-ripple-effect type="bounded">
-                      </ion-ripple-effect>
-      
-                  <img *ngIf="opcion.idioma == 'pt'" [src]="value.img" class="slide-image"
-                      (click)="play(value.nombre + '-pt')" alt="color.nombre">
-                      <ion-ripple-effect type="bounded">
-                      </ion-ripple-effect> -->
               </ion-card-content>
           </ion-card>  
       </ion-col>

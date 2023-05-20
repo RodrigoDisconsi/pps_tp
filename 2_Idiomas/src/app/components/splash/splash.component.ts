@@ -13,7 +13,7 @@ export class SplashComponent implements OnInit {
   {
     setTimeout(() => {
      
-     this.viewCtrl.dismiss().then(()=> console.log("Dismiss"));
+     this.viewCtrl.dismiss().then();
     }, 5000);
   }
 

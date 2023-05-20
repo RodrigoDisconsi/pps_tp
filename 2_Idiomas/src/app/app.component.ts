@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { ModalController, Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { SplashComponent } from './components/splash/splash.component';
@@ -17,15 +15,12 @@ export class AppComponent {
     private platform: Platform,
     private statusBar: StatusBar,
     private modalCtrl: ModalController,
-    private router: Router,
     private audioService: AudioService
   ) {
+    this.audioService.cargarAudios();
     this.platform.ready().then(() => {
       this.presentModal();
-      this.audioService.cargarAudio().then(() =>{
-       this.router.navigate(['/inicio']);
-      })
-    });
+      });
   }
 
   async presentModal() {

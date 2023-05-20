@@ -45,12 +45,9 @@ export class MenuPage implements OnInit {
   constructor(private router:Router) 
   {
     this.opcion = AudioService.idiomaSeleccionado; 
-    this.selectedTheme = this.themes[0];
-    
   }
 
   ngOnInit() {
-    console.log(this.router.url);
     if(this.router.url.includes('animales')){
       this.selectedTheme = this.themes[0];
     }
@@ -68,13 +65,11 @@ export class MenuPage implements OnInit {
     this.opcion.img = opcion.img;
 
     AudioService.idiomaSeleccionado = this.opcion;
-    console.log(AudioService.idiomaSeleccionado);
   }
 
   seleccionarTheme(theme)
   {   
     this.selectedTheme = theme;
-    console.log(theme.route);
     this.router.navigateByUrl(theme.route);
   }
 }

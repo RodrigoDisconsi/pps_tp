@@ -19,8 +19,6 @@ export class DataService {
 
   login(usuario: Usuario)
   {
-    // return this.test(usuario);
-    console.log(usuario);
     return new Promise<any>((resolve, reject) => {
       this.firebaseAuth.signInWithEmailAndPassword(usuario.email, usuario.pass)
                         .then(response => {
@@ -60,7 +58,6 @@ export class DataService {
 
   public guardarLocal(id: string)
   {
-    console.log(id);
     database().ref('usuarios/' + id).on('value',(snapshot) =>{
                 this.storage.set('usuario', snapshot.val());       
               });

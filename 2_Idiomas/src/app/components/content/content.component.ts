@@ -15,10 +15,9 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {}
 
-  play(audioId: string)
+  async play(audioId: string)
   {
-    console.log("Audio id: ",audioId);
-    this.audioService.play(audioId);
+    await this.audioService.play(audioId);
   }
 
 }

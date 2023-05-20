@@ -74,7 +74,7 @@ export class ImagenService {
       .catch(console.error);
     })
     .catch( error => {
-      this.presentToast(error);
+      this.presentToast('Por favor suba o seleccione una foto');
     })
     return imagen;
   }
